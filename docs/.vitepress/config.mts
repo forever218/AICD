@@ -95,7 +95,8 @@ export default defineConfig({
           { text: 'Article', link: '/initiative/' },
           { text: 'Levels', link: '/levels' },
           { text: 'Adopt', link: '/adopt' },
-          { text: 'Verifier', link: '/verifier' }
+          { text: 'Verifier', link: '/verifier' },
+          { text: 'About', link: '/about' }
         ],
         outline: { level: [2, 3], label: 'On this page' },
         docFooter: { prev: 'Previous', next: 'Next' },
@@ -127,7 +128,8 @@ export default defineConfig({
           { text: '正文', link: '/zh/initiative/' },
           { text: '等级', link: '/zh/levels' },
           { text: '采用', link: '/zh/adopt' },
-          { text: '验证器', link: '/zh/verifier' }
+          { text: '验证器', link: '/zh/verifier' },
+          { text: '关于', link: '/zh/about' }
         ],
         outline: { level: [2, 3], label: '本页' },
         docFooter: { prev: '上一节', next: '下一节' },
@@ -159,7 +161,8 @@ export default defineConfig({
           { text: '正文', link: '/zh-tw/initiative/' },
           { text: '等級', link: '/zh-tw/levels' },
           { text: '採用', link: '/zh-tw/adopt' },
-          { text: '驗證器', link: '/zh-tw/verifier' }
+          { text: '驗證器', link: '/zh-tw/verifier' },
+          { text: '關於', link: '/zh-tw/about' }
         ],
         outline: { level: [2, 3], label: '本頁' },
         docFooter: { prev: '上一節', next: '下一節' },
