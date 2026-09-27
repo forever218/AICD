@@ -1,0 +1,28 @@
+import { spawn } from 'node:child_process'
+import { setTimeout as sleep } from 'node:timers/promises'
+const CHROME = 'C://Program Files\\Google\\Chrome\\Application\\chrome.exe'
+const ORIGIN = 'http://127.0.0.1:5199'
+const PORT = 9855
+const chrome = spawn(CHROME, ['--headless=new','--disable-gpu','--hide-scrollbars','--no-first-run',`--remote-debugging-port=${PORT}`,'--window-size=1440,900','about:blank'], { stdio: 'ignore' })
+async function t(){for(let i=0;i<80;i++){try{const l=await (await fetch(`http://127.0.0.1:${PORT}/json/list`)).json();const p=l.find(x=>x.type==='page');if(p)return p}catch{}await sleep(300)}throw new Error('no chrome')}
+const page = await t(); const ws = new WebSocket(page.webSocketDebuggerUrl)
+let id=0; const pend=new Map()
+ws.addEventListener('message',e=>{const m=JSON.parse(e.data); if(m.id&&pend.has(m.id)){pend.get(m.id)(m);pend.delete(m.id)}})
+await new Promise(r=>ws.addEventListener('open',r))
+const send=(m,p={})=>{const i=++id;return new Promise(r=>{pend.set(i,r);ws.send(JSON.stringify({id:i,method:m,params:p}))})}
+const js=async(e)=>(await send('Runtime.evaluate',{expression:e,returnByValue:true})).result?.result?.value
+await send('Page.enable')
+await send('Emulation.setDeviceMetricsOverride',{width:1440,height:900,deviceScaleFactor:1,mobile:false})
+for (const p of process.argv[2].split(',')) {
+  await send('Page.navigate',{url:ORIGIN+p}); await sleep(2400)
+  const r = await js(`(()=>{
+    const R=e=>{const b=e.getBoundingClientRect();return '('+b.left.toFixed(0)+','+b.top.toFixed(0)+') '+b.width.toFixed(0)+'x'+b.height.toFixed(0)}
+    const out=[]
+    let el=document.querySelector('.VPDoc')
+    const walk=(e,d)=>{ if(d>4)return; for(const c of e.children){ if(c.classList.contains('aside'))continue; const st=getComputedStyle(c); out.push('  '.repeat(d)+c.tagName.toLowerCase()+'.'+(typeof c.className==='string'?c.className.split(' ').slice(0,2).join('.'):'')+' '+R(c)+' mt='+st.marginTop+' pt='+st.paddingTop+' txt="'+c.textContent.trim().slice(0,28)+'"'); walk(c,d+1)}}
+    out.push('VPDoc '+R(el)+' pt='+getComputedStyle(el).paddingTop)
+    walk(el,1)
+    return out.slice(0,18).join('\\n')})()`)
+  console.log('───── '+p+' ─────'); console.log(r)
+}
+ws.close();chrome.kill()

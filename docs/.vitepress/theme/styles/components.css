@@ -1,0 +1,271 @@
+/* ─────────────────────────────────────────────────────────────
+   AICD · 首页与页面级组件
+   ───────────────────────────────────────────────────────────── */
+
+/* 注意：不要用 `.home` —— VitePress 会给首页的 `.VPNavBar` 也加上 `home` 类，
+   全局 `.home` 规则会顺带把 padding 打进导航栏，导致顶栏被撑出大片空白。 */
+.home-scene {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* 单屏：正好填满导航栏以下的可视高度，上下内容居中，不产生滚动 */
+  height: calc(100vh - var(--vp-nav-height));
+  height: calc(100svh - var(--vp-nav-height));
+  padding: clamp(0.8rem, 2.6vh, 1.8rem) 0;
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+
+.hero {
+  padding-bottom: clamp(1.4rem, 3.6vh, 2.8rem);
+}
+
+/* 背景印章：随整个屏幕垂直居中，而不是贴顶。 */
+.hero__glyph {
+  position: absolute;
+  top: 50%;
+  right: -1rem;
+  transform: translateY(-50%);
+  opacity: 0.085;
+  pointer-events: none;
+}
+
+.hero__eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0 0 clamp(0.9rem, 2.4vh, 1.7rem);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--seal-ink);
+}
+
+.hero__eyebrow::after {
+  content: '';
+  flex: 1;
+  max-width: 12rem;
+  height: 1px;
+  background: var(--rule-strong);
+}
+
+.hero__title {
+  margin: 0;
+  /* 同时受宽度与高度约束，矮屏也压得住，单屏不会被顶出滚动条 */
+  font-size: clamp(2.05rem, min(1.1rem + 5.4vw, 7.4vh), 4.2rem);
+  line-height: 1.14;
+  font-weight: 600;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+.hero__latin {
+  margin: clamp(0.7rem, 1.8vh, 1.2rem) 0 0;
+  font-style: italic;
+  font-size: clamp(1.05rem, min(0.9rem + 0.9vw, 2.6vh), 1.7rem);
+  line-height: 1.5;
+  color: var(--ink-soft);
+  letter-spacing: 0.005em;
+}
+
+.hero__lede {
+  margin: clamp(1.5rem, 3.6vh, 2.6rem) 0 0;
+  max-width: 26em;
+  padding-left: clamp(1rem, 2vw, 1.5rem);
+  border-left: 2px solid var(--seal);
+  font-size: clamp(1.02rem, min(0.95rem + 0.45vw, 2.5vh), 1.35rem);
+  line-height: 1.8;
+  color: var(--ink);
+  text-wrap: pretty;
+}
+
+.hero__terms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+  margin: clamp(1.1rem, 2.8vh, 1.9rem) 0 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+}
+
+.hero__terms li {
+  display: flex;
+  align-items: center;
+}
+
+.hero__terms li + li::before {
+  content: '';
+  width: 3px;
+  height: 3px;
+  margin-right: 1rem;
+  background: var(--rule-strong);
+}
+
+/* Hero 入场 */
+@media (prefers-reduced-motion: no-preference) {
+  .hero > * {
+    animation: aicd-rise 720ms var(--ease) both;
+  }
+
+  .hero__eyebrow {
+    animation-delay: 40ms;
+  }
+  .hero__title {
+    animation-delay: 120ms;
+  }
+  .hero__latin {
+    animation-delay: 200ms;
+  }
+  .hero__lede {
+    animation-delay: 300ms;
+  }
+  .hero__terms {
+    animation-delay: 420ms;
+  }
+  .hero__glyph {
+    animation: aicd-fade 1400ms var(--ease) 200ms both;
+  }
+
+  .closing > * {
+    animation: aicd-rise 720ms var(--ease) both;
+  }
+
+  .closing__en {
+    animation-delay: 520ms;
+  }
+
+  .closing__sign {
+    animation-delay: 640ms;
+  }
+
+  @keyframes aicd-fade {
+    from {
+      opacity: 0;
+      transform: translateY(-50%) scale(0.94);
+    }
+    to {
+      opacity: 0.085;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+/* 移动端隐藏背景印章。
+   注意：不能写单类选择器 —— AicdMark.vue 的 scoped 样式带出
+   `.aicd-mark[data-v-xxx] { display: block }`，权重 (0,2,0)，
+   会压过 `.hero__glyph`(0,1,0)，导致这条规则形同虚设。
+   这里用三层选择器 (0,3,0) 保证生效，且不依赖样式加载顺序。 */
+@media (max-width: 900px) {
+  .home-scene .hero .hero__glyph {
+    display: none;
+  }
+}
+
+/* ── 结语 ────────────────────────────────────────────────────── */
+
+.closing {
+  padding: clamp(1.6rem, 4.2vh, 3rem) 0 clamp(0.5rem, 1.4vh, 1rem);
+  border-top: 1px solid var(--rule);
+}
+
+.closing__en {
+  margin: 0;
+  font-size: clamp(1.35rem, min(0.95rem + 2.2vw, 4.4vh), 2.3rem);
+  font-style: italic;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  text-wrap: balance;
+}
+
+.closing__en em {
+  font-style: italic;
+  color: var(--seal-ink);
+}
+
+.closing__sign {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-top: clamp(1.1rem, 2.8vh, 2.1rem);
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+/* ── 内容页的页首元信息 ──────────────────────────────────────── */
+
+.page-head {
+  margin-bottom: 2.4rem;
+}
+
+.page-head__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+  margin: 0 0 1.1rem;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--seal-ink);
+}
+
+.page-head__meta span + span::before {
+  content: '/';
+  margin-right: 1rem;
+  color: var(--rule-strong);
+}
+
+.page-head__note {
+  margin: 1.2rem 0 0;
+  max-width: var(--measure);
+  font-size: 1.06em;
+  line-height: 1.9;
+  color: var(--ink-soft);
+}
+
+/* ── 采用页的小型版式补充 ────────────────────────────────────── */
+
+.rule-list {
+  margin: 1.6rem 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--rule);
+}
+
+.rule-list li {
+  display: grid;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 0.98rem;
+  line-height: 1.8;
+  color: var(--ink-soft);
+}
+
+.rule-list b {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding-top: 0.28em;
+}
+
+@media (max-width: 640px) {
+  .rule-list li {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}

@@ -1,0 +1,112 @@
+/* ─────────────────────────────────────────────────────────────
+   AICD · Design tokens
+   方向：一份印在纸上的宣言。暖白纸、深墨字、发丝线、
+   唯一的彩色是一枚印章朱红 —— 只作为「标记」出现。
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  /* 字体家族 */
+  --font-serif: 'Newsreader Variable', 'Noto Serif SC', 'Source Han Serif SC', 'Songti SC',
+    Georgia, serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono',
+    monospace;
+
+  /* 字号与节奏 */
+  --fs-body: clamp(1.06rem, 0.99rem + 0.5vw, 1.3rem);
+  --fs-small: 0.9rem;
+  --fs-label: 0.8rem;
+  --lh-body: 1.92;
+  --lh-tight: 1.35;
+  --measure: 33em;
+
+  /* 动效 —— 只有指数式缓出，绝不回弹 */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.33, 0.72, 0, 1);
+
+  /* 空间 */
+  --gap-section: clamp(3.2rem, 6vw, 5rem);
+  --gutter: clamp(1.25rem, 4vw, 2.5rem);
+  /* 内页正文距离顶栏的留白（正文首个标题、右侧目录共用） */
+  --doc-pad-top: clamp(1.7rem, 3.4vh, 2.4rem);
+}
+
+/* ── 明亮：暖白纸 ─────────────────────────────────────────── */
+:root {
+  color-scheme: light;
+
+  --paper: oklch(0.9865 0.0035 92);
+  --paper-raised: oklch(0.973 0.0045 92);
+  --paper-sunken: oklch(0.9555 0.005 92);
+
+  --ink: oklch(0.228 0.012 268);
+  --ink-soft: oklch(0.405 0.011 268);
+  --ink-faint: oklch(0.505 0.010 268);
+
+  --rule: oklch(0.906 0.006 92);
+  --rule-strong: oklch(0.83 0.008 92);
+
+  --seal: oklch(0.552 0.188 27.5);
+  --seal-ink: oklch(0.46 0.175 27.5);
+  --seal-wash: color-mix(in oklab, var(--seal) 9%, var(--paper));
+
+  --link: var(--seal-ink);
+}
+
+/* ── 暗色：深墨 ───────────────────────────────────────────── */
+html.dark {
+  color-scheme: dark;
+
+  --paper: oklch(0.176 0.009 268);
+  --paper-raised: oklch(0.213 0.010 268);
+  --paper-sunken: oklch(0.149 0.008 268);
+
+  --ink: oklch(0.945 0.004 92);
+  --ink-soft: oklch(0.805 0.006 92);
+  --ink-faint: oklch(0.705 0.007 92);
+
+  --rule: oklch(0.302 0.009 268);
+  --rule-strong: oklch(0.392 0.010 268);
+
+  --seal: oklch(0.675 0.168 28);
+  --seal-ink: oklch(0.745 0.148 28);
+  --seal-wash: color-mix(in oklab, var(--seal) 12%, var(--paper));
+
+  --link: var(--seal-ink);
+}
+
+/* ── 映射到 VitePress 变量 ─────────────────────────────────── */
+:root,
+html.dark {
+  --vp-font-family-base: var(--font-serif);
+  --vp-font-family-mono: var(--font-mono);
+
+  --vp-c-bg: var(--paper);
+  --vp-c-bg-alt: var(--paper-sunken);
+  --vp-c-bg-elv: var(--paper-raised);
+  --vp-c-bg-soft: var(--paper-raised);
+
+  --vp-c-text-1: var(--ink);
+  --vp-c-text-2: var(--ink-soft);
+  --vp-c-text-3: var(--ink-faint);
+
+  --vp-c-divider: var(--rule);
+  --vp-c-border: var(--rule-strong);
+  --vp-c-gutter: var(--rule);
+
+  --vp-c-brand-1: var(--link);
+  --vp-c-brand-2: var(--seal);
+  --vp-c-brand-3: var(--seal);
+  --vp-c-brand-soft: var(--seal-wash);
+
+  --vp-c-default-soft: var(--paper-sunken);
+
+  --vp-nav-height: 70px;
+  --vp-nav-bg-color: var(--paper);
+  --vp-sidebar-bg-color: var(--paper);
+
+  --vp-code-font-size: 0.85em;
+  --vp-code-line-height: 1.75;
+  --vp-code-block-bg: var(--paper-sunken);
+  --vp-code-copy-code-bg: var(--paper-raised);
+  --vp-code-copy-code-hover-bg: var(--paper-raised);
+}

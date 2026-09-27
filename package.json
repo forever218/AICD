@@ -1,0 +1,20 @@
+{
+  "name": "aicd",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AICD 1.0 — 人工智能内容主动披露倡议 / AI Content Disclosure Initiative",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.4"
+  },
+  "dependencies": {
+    "@fontsource-variable/newsreader": "^5.2.5",
+    "@fontsource/ibm-plex-mono": "^5.2.5",
+    "@fontsource/noto-serif-sc": "^5.2.5"
+  }
+}

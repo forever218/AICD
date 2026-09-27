@@ -1,0 +1,747 @@
+/* ─────────────────────────────────────────────────────────────
+   AICD · Base layer — 版式、导航、正文、页脚
+   ───────────────────────────────────────────────────────────── */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-synthesis-weight: none;
+}
+
+::selection {
+  background: var(--seal-wash);
+  color: var(--ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--seal);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* ── 首页：单屏、不滚动 ──────────────────────────────────────── */
+
+/* html.is-home 由 Layout.vue 依据 frontmatter.layout === 'home' 挂上。
+   首页所有内容（导航下居中区）正好一屏，任何方向都不产生滚动条。 */
+html.is-home,
+html.is-home body {
+  overflow: hidden;
+}
+
+/* VPHome 默认给首页留 96/128px 下沉边距，会顶出一屏之外 */
+html.is-home .VPHome {
+  margin-bottom: 0;
+}
+
+/* 页脚会撑破单屏；首页不再展示，其余内页保留 */
+html.is-home .VPFooter {
+  display: none;
+}
+
+/* ── 顶栏 ────────────────────────────────────────────────────── */
+
+.VPNavBar,
+.VPNavBar .content-body,
+.VPNavBar.has-sidebar .content-body {
+  background: var(--paper);
+  backdrop-filter: none;
+}
+
+.VPNavBar {
+  border-bottom: 1px solid var(--rule);
+}
+
+/* 顶栏与正文栏同宽同位：
+   .VPHomeContent.container 是 max-width 1280 / padding 24·48·64，
+   这里复刻同一套几何，菜单最右缘才会和正文右缘落在同一条竖线上。 */
+.VPNavBar .wrapper,
+.VPNavBar.has-sidebar .wrapper {
+  padding: 0;
+}
+
+.VPNavBar .container,
+.VPNavBar.has-sidebar .container {
+  max-width: 1280px;
+  padding: 0 24px;
+  box-sizing: border-box;
+}
+
+@media (min-width: 640px) {
+  .VPNavBar .container,
+  .VPNavBar.has-sidebar .container {
+    padding: 0 48px;
+  }
+}
+
+@media (min-width: 960px) {
+  .VPNavBar .container,
+  .VPNavBar.has-sidebar .container {
+    padding: 0 64px;
+  }
+}
+
+.VPNavBar .title,
+.VPNavBar.has-sidebar .title {
+  border-bottom: 0;
+}
+
+@media (min-width: 960px) {
+  .VPNavBar.has-sidebar .content {
+    padding-left: 0;
+  }
+  .VPNavBar.has-sidebar .title {
+    width: auto;
+    padding: 0 1.5rem 0 0;
+    border: 0;
+  }
+}
+
+.VPNavBarTitle .title {
+  display: flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+/* ── 内页顶栏左侧「AICD」标识 ────────────────────────────────── */
+/*
+   目标：标识左缘与正文栏（.VPDoc .content-container）左缘落在同一条竖线上。
+   正文栏是「VPDoc padding → container 居中 → content padding → content-container 居中」
+   四级算出来的，且在三档断点下各自不同，用 calc 复刻既脆又难验证。
+   因此这里不再推导，而是直接复刻 VPDoc / VPDoc 内部那四级盒模型
+   （24/32 内边距、992/1104 容器、752/784 栏宽、688 内容宽、256 侧栏），
+   让标识走一遍完全相同的布局，落点自然一致。
+   整套几何是 absolute 覆盖层，不参与顶栏 flex，顶栏右侧菜单不受影响。
+*/
+
+.nav-brand {
+  position: absolute;
+  inset: 0 0 auto 0;
+  /* 必须盖在 .content-body 之上：该元素在 ≥960px 且非首页时是
+     position: relative + 不透明纸色背景，会整块压住左侧标识。
+     顶栏内没有其它正 z-index 元素（has-sidebar 未启用），取 2 足够。 */
+  z-index: 2;
+  box-sizing: border-box;
+  padding: 0 24px; /* = .VPDoc 横向内边距 */
+  height: var(--vp-nav-height);
+}
+
+@media (min-width: 768px) {
+  .nav-brand {
+    padding: 0 32px;
+  }
+}
+
+/* 覆盖层整体不接收点击，避免挡住顶栏空白处；只有文字本身可点 */
+html .VPNavBar .nav-brand,
+html .VPNavBar .nav-brand * {
+  pointer-events: none;
+}
+
+html .VPNavBar .nav-brand__box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 960px) {
+  html .VPNavBar .nav-brand__box {
+    max-width: 992px; /* = .VPDoc:not(.has-sidebar) .container */
+  }
+}
+
+@media (min-width: 1440px) {
+  html .VPNavBar .nav-brand__box {
+    max-width: 1104px;
+  }
+}
+
+html .VPNavBar .nav-brand__col {
+  box-sizing: border-box;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  html .VPNavBar .nav-brand__col {
+    max-width: 752px; /* = .VPDoc:not(.has-sidebar) .content */
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1280px) {
+  html .VPNavBar .nav-brand__col {
+    order: 1;
+    margin: 0;
+    min-width: 640px;
+  }
+}
+
+@media (min-width: 1440px) {
+  html .VPNavBar .nav-brand__col {
+    max-width: 784px;
+  }
+}
+
+/* 占位：正文右侧有目录栏时，正文栏会被挤向左，这里同步留出等宽侧栏 */
+html .VPNavBar .nav-brand__aside {
+  display: none;
+  order: 2;
+  flex-grow: 1;
+  box-sizing: border-box;
+  padding-left: 32px;
+  width: 100%;
+  max-width: 256px;
+}
+
+@media (min-width: 1280px) {
+  html .VPNavBar .nav-brand__aside {
+    display: block;
+  }
+}
+
+html .VPNavBar .nav-brand__cell {
+  display: block;
+  margin: 0 auto;
+  max-width: 688px; /* = .content-container */
+}
+
+html .VPNavBar .nav-brand__text {
+  pointer-events: auto;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 1.02rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--ink);
+  text-decoration: none;
+  transition: opacity 260ms var(--ease);
+}
+
+html .VPNavBar .nav-brand__text:hover {
+  opacity: 0.62;
+}
+
+/* 焦点落在外层那个零宽链接上，把焦点环移到可见的文字上 */
+html .VPNavBar .VPNavBarTitle .title:focus-visible {
+  outline: none;
+}
+
+html .VPNavBar .VPNavBarTitle .title:focus-visible .nav-brand__text {
+  outline: 2px solid var(--seal);
+  outline-offset: 5px;
+  border-radius: 2px;
+}
+
+.VPNavBarMenuLink {
+  font-family: var(--font-mono);
+  font-size: 0.83rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  position: relative;
+  transition: color 260ms var(--ease);
+}
+
+.VPNavBarMenuLink::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 20px;
+  height: 1px;
+  background: var(--seal);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 380ms var(--ease);
+}
+
+.VPNavBarMenuLink:hover,
+.VPNavBarMenuLink.active {
+  color: var(--ink);
+}
+
+.VPNavBarMenuLink:hover::after,
+.VPNavBarMenuLink.active::after {
+  transform: scaleX(1);
+}
+
+/* 语言入口统一交给自绘的地球图标（LangSwitch），
+   主题自带的语言菜单在三处都会渲染，一并隐藏：
+   宽屏顶栏、中屏「更多」浮层、移动端抽屉。 */
+.VPFlyout.VPNavBarTranslations,
+.VPNavBarExtra .group.translations,
+.VPNavScreenTranslations {
+  display: none !important;
+}
+
+.VPSwitchAppearance {
+  border-color: var(--rule-strong) !important;
+}
+
+/* 移动端菜单 */
+.VPNavScreen,
+.VPNavScreenMenuLink {
+  background: var(--paper);
+  font-family: var(--font-mono);
+  letter-spacing: 0.06em;
+}
+
+.VPNavBarHamburger .top,
+.VPNavBarHamburger .middle,
+.VPNavBarHamburger .bottom,
+.VPNavBarHamburger.active .top,
+.VPNavBarHamburger.active .middle,
+.VPNavBarHamburger.active .bottom {
+  background: var(--ink);
+}
+
+/* ── 正文 ────────────────────────────────────────────────────── */
+
+.VPDoc {
+  padding-bottom: clamp(4rem, 10vh, 7rem);
+}
+
+/* 顶部收紧：正文贴着顶栏起步，不再空出一大段。
+   选择器带 #app 是为了压过 VitePress 组件作用域样式（.VPDoc[data-v-xxx]）的权重。 */
+#app .VPDoc {
+  padding-top: var(--doc-pad-top);
+}
+
+/* 文章首个区块的段前间距会穿透包裹层、把整栏往下推，这里一律归零 */
+.vp-doc > :first-child,
+.vp-doc > :first-child > :first-child,
+.vp-doc > :first-child > :first-child > :first-child {
+  margin-top: 0;
+}
+
+/* 文章首个标题不再重复画顶部分隔线，避免开头出现「一条空线」 */
+.vp-doc h2:first-child,
+.vp-doc > :first-child > h2:first-child {
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* 右侧「本页」目录与正文同高起步 */
+#app .VPDoc .aside-container {
+  padding-top: calc(
+    var(--vp-nav-height) + var(--vp-layout-top-height, 0px) + var(--doc-pad-top)
+  );
+}
+
+.VPDoc.has-aside .content-container {
+  max-width: 41.5rem;
+}
+
+.VPDoc:not(.has-aside) .content-container {
+  max-width: 46rem;
+}
+
+.vp-doc {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  color: var(--ink);
+  font-kerning: normal;
+}
+
+/* VitePress 默认会给 p 固定行高，统一交还给正文节奏 */
+.vp-doc p,
+.vp-doc li,
+.vp-doc dl,
+.vp-doc dt,
+.vp-doc dd,
+.vp-doc td,
+.vp-doc th,
+.vp-doc summary {
+  line-height: var(--lh-body);
+}
+
+.vp-doc p {
+  margin: 1.3em 0;
+}
+
+/* 标题层 */
+.vp-doc h1,
+.vp-doc h2,
+.vp-doc h3,
+.vp-doc h4,
+.vp-doc h5,
+.vp-doc h6 {
+  color: var(--ink);
+  font-weight: 600;
+  font-family: var(--font-serif);
+  letter-spacing: 0.004em;
+}
+
+.vp-doc h1 {
+  font-size: clamp(1.85rem, 1.3rem + 2.2vw, 2.7rem);
+  line-height: 1.26;
+  margin: 0 0 1.1rem;
+  text-wrap: balance;
+}
+
+.vp-doc h2 {
+  font-size: clamp(1.46rem, 1.18rem + 1.1vw, 1.9rem);
+  line-height: 1.38;
+  margin: var(--gap-section) 0 1.15rem;
+  padding-top: clamp(1.5rem, 3vw, 2.3rem);
+  border-top: 1px solid var(--rule);
+  text-wrap: balance;
+}
+
+.vp-doc h2::before {
+  content: '';
+  display: inline-block;
+  width: 0.36em;
+  height: 0.36em;
+  margin-right: 0.56em;
+  margin-bottom: 0.06em;
+  background: var(--seal);
+  vertical-align: 0.06em;
+}
+
+/* 个别页面（正文、等级）不需要标题前的朱红方块：由 frontmatter `headingMark: false` 关闭 */
+html.no-heading-mark .vp-doc h2::before {
+  display: none;
+}
+
+.vp-doc h3 {
+  font-size: clamp(1.18rem, 1.06rem + 0.5vw, 1.4rem);
+  line-height: 1.5;
+  margin: 2.6rem 0 0.9rem;
+}
+
+.vp-doc h4 {
+  font-family: var(--font-mono);
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 2rem 0 0.7rem;
+}
+
+/* 链接：默认细下划线，悬停时朱红点亮 */
+.vp-doc a {
+  color: var(--link);
+  font-weight: inherit;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.22em;
+  text-decoration-color: color-mix(in oklab, var(--seal) 38%, transparent);
+  transition: text-decoration-color 260ms var(--ease), color 260ms var(--ease);
+}
+
+.vp-doc a:hover {
+  text-decoration-color: var(--seal);
+}
+
+/* 列表 */
+.vp-doc ul,
+.vp-doc ol {
+  padding-left: 1.25em;
+}
+
+.vp-doc li + li {
+  margin-top: 0.45em;
+}
+
+.vp-doc li::marker {
+  color: var(--seal);
+  font-size: 0.9em;
+}
+
+.vp-doc ol > li::marker {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+/* 强调 */
+.vp-doc strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.vp-doc em {
+  font-style: italic;
+  color: var(--ink-soft);
+}
+
+/* 引文：规范里的「示例披露行」 */
+.vp-doc blockquote {
+  margin: 2em 0;
+  padding: 0.15em 0 0.15em 1.3em;
+  border-left: 2px solid var(--seal);
+  color: var(--ink-soft);
+}
+
+.vp-doc blockquote > p {
+  margin: 0.45em 0;
+  font-family: var(--font-mono);
+  font-size: 0.92em;
+  line-height: 1.85;
+  letter-spacing: 0.005em;
+  color: var(--ink-soft);
+}
+
+/* 行内代码 */
+.vp-doc :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  color: var(--ink);
+  background: var(--seal-wash);
+  border: 0;
+  border-radius: 2px;
+  padding: 0.1em 0.34em;
+}
+
+/* 代码块 */
+.vp-doc div[class*='language-'] {
+  margin: 2em 0;
+  background: var(--paper-sunken);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.vp-doc [class*='language-'] pre {
+  padding: 1.15rem 1.3rem;
+  background: transparent;
+}
+
+.vp-doc [class*='language-'] code {
+  font-family: var(--font-mono);
+  font-size: 0.84em;
+  line-height: 1.8;
+}
+
+.vp-doc [class*='language-'] > span.lang {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  top: 10px;
+  right: 12px;
+}
+
+.vp-doc [class*='language-'] > button.copy {
+  border-color: var(--rule);
+  border-radius: 2px;
+  background-color: transparent;
+  transition: background-color 240ms var(--ease), border-color 240ms var(--ease);
+}
+
+.vp-doc [class*='language-'] > button.copy:hover {
+  border-color: var(--seal);
+  background-color: transparent;
+}
+
+/* 表格 */
+.vp-doc table {
+  display: table;
+  width: 100%;
+  margin: 2em 0;
+  border-collapse: collapse;
+  font-size: 0.96em;
+}
+
+.vp-doc th,
+.vp-doc td {
+  border: 0;
+  border-bottom: 1px solid var(--rule);
+  padding: 0.85em 0.9em;
+  text-align: left;
+  vertical-align: top;
+}
+
+.vp-doc th {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  border-bottom-color: var(--rule-strong);
+}
+
+.vp-doc tr,
+.vp-doc tr:nth-child(2n) {
+  background: transparent;
+  border-top: 0;
+}
+
+.vp-doc tbody tr {
+  transition: background-color 240ms var(--ease);
+}
+
+.vp-doc tbody tr:hover {
+  background: var(--paper-sunken);
+}
+
+.vp-doc hr {
+  margin: 3.2em 0;
+  border: 0;
+  border-top: 1px solid var(--rule);
+}
+
+/* 顶部的元信息行 / 页首引言 */
+.vp-doc .lede {
+  font-size: 1.06em;
+  line-height: 1.85;
+  color: var(--ink-soft);
+  max-width: var(--measure);
+}
+
+.vp-doc .meta-line {
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin: 0 0 1.4rem;
+}
+
+/* ── 右侧目录 ────────────────────────────────────────────────── */
+
+.VPDocAsideOutline .outline-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.VPDocAsideOutline .outline-link {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  color: var(--ink-faint);
+  transition: color 240ms var(--ease);
+}
+
+.VPDocAsideOutline .outline-link:hover {
+  color: var(--ink);
+}
+
+.VPDocAsideOutline .outline-link.active {
+  color: var(--seal-ink);
+}
+
+.VPDocAsideOutline .outline-marker {
+  width: 2px;
+  background-color: var(--seal);
+  transition: top 320ms var(--ease), opacity 320ms var(--ease);
+}
+
+/* ── 页脚 ────────────────────────────────────────────────────── */
+
+.VPFooter {
+  border-top: 1px solid var(--rule);
+  background: var(--paper);
+  padding: 2.8rem 0 3rem;
+}
+
+.VPFooter .container {
+  align-items: flex-start;
+  max-width: 1152px;
+  text-align: left;
+  padding: 0 1.5rem;
+}
+
+.VPFooter .message {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  line-height: 2;
+  letter-spacing: 0.03em;
+  color: var(--ink-soft);
+  max-width: 46rem;
+  margin: 0;
+}
+
+.VPFooter .copyright {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-faint);
+  margin-top: 0.5rem;
+}
+
+/* ── 路由进入：正文逐段浮现 ──────────────────────────────────── */
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes aicd-rise {
+    from {
+      opacity: 0;
+      transform: translateY(11px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  html.route-enter .vp-doc > *:not(.home-scene) {
+    animation: aicd-rise 600ms var(--ease) both;
+  }
+
+  html.route-enter .vp-doc > *:not(.home-scene):nth-child(1) {
+    animation-delay: 20ms;
+  }
+  html.route-enter .vp-doc > *:not(.home-scene):nth-child(2) {
+    animation-delay: 60ms;
+  }
+  html.route-enter .vp-doc > *:not(.home-scene):nth-child(3) {
+    animation-delay: 100ms;
+  }
+  html.route-enter .vp-doc > *:not(.home-scene):nth-child(4) {
+    animation-delay: 140ms;
+  }
+  html.route-enter .vp-doc > *:not(.home-scene):nth-child(5) {
+    animation-delay: 180ms;
+  }
+  html.route-enter .vp-doc > *:not(.home-scene):nth-child(6) {
+    animation-delay: 220ms;
+  }
+  html.route-enter .vp-doc > *:not(.home-scene):nth-child(7) {
+    animation-delay: 260ms;
+  }
+  html.route-enter .vp-doc > *:not(.home-scene):nth-child(8) {
+    animation-delay: 300ms;
+  }
+
+  html.route-enter .vp-doc > *:nth-child(n + 9) {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
