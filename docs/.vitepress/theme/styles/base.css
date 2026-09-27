@@ -59,6 +59,23 @@ html.is-home .VPFooter {
   border-bottom: 1px solid var(--rule);
 }
 
+/* ── 移动端（<960px）：顶栏置顶 · 顶部目录条撤掉 ──────────────── */
+
+@media (max-width: 959px) {
+  /* 主题在窄屏把导航设成 position: relative，滚动时顶栏会跟着滚走。
+     #app 用来压过组件 scoped 样式（.VPNav[data-v-*]）的权重。 */
+  #app .VPNav {
+    position: sticky;
+    top: 0;
+  }
+
+  /* 顶部那条「本页 / On this page」目录下拉不再需要，
+     改由 MobileToc 在右下角展开（含「回到顶部」）。 */
+  #app .VPLocalNav {
+    display: none;
+  }
+}
+
 /* 顶栏与正文栏同宽同位：
    .VPHomeContent.container 是 max-width 1280 / padding 24·48·64，
    这里复刻同一套几何，菜单最右缘才会和正文右缘落在同一条竖线上。 */

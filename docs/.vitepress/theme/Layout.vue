@@ -4,6 +4,7 @@ import { inBrowser, useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import ScrollProgress from './components/ScrollProgress.vue'
 import LangSwitch from './components/LangSwitch.vue'
+import MobileToc from './components/MobileToc.vue'
 
 const { Layout } = DefaultTheme
 const route = useRoute()
@@ -67,6 +68,8 @@ watch(
   <Layout>
     <template #layout-top>
       <ScrollProgress />
+      <!-- 移动端：右下角目录按钮（顶部那条目录已由 CSS 撤掉） -->
+      <MobileToc />
     </template>
 
     <!-- 顶栏最右：语言切换器（地球网格）。主题自带的下拉已用 CSS 隐藏。 -->
