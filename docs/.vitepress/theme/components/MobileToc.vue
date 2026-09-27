@@ -196,9 +196,11 @@ onBeforeUnmount(() => {
 <style scoped>
 /* 容器只负责定位与层级：45 高于顶栏(30)，低于导航抽屉(60+) */
 .mtoc {
+  /* 贴底会挡住正文尾部，整体抬高约 2.5 个按钮高度（按钮 3rem） */
+  --mtoc-lift: 7.5rem;
   position: fixed;
   right: max(0.9rem, env(safe-area-inset-right));
-  bottom: max(0.9rem, env(safe-area-inset-bottom));
+  bottom: calc(max(0.9rem, env(safe-area-inset-bottom)) + var(--mtoc-lift));
   z-index: 45;
   pointer-events: none;
 }
@@ -221,10 +223,11 @@ onBeforeUnmount(() => {
   width: 3rem;
   height: 3rem;
   padding: 0;
-  border: 1px solid var(--rule-strong);
+  border: 1px solid var(--ink);
   border-radius: 999px;
-  background: var(--paper-raised);
-  color: var(--ink);
+  /* 明状态：黑底白字；暗状态：白底黑字（--ink/--paper 随主题互换） */
+  background: var(--ink);
+  color: var(--paper);
   cursor: pointer;
   pointer-events: auto;
   box-shadow: 0 10px 26px -16px oklch(0 0 0 / 0.55);
@@ -234,10 +237,11 @@ onBeforeUnmount(() => {
     border-color 260ms var(--ease);
 }
 
+/* 展开时反相，形成明确的开关反馈 */
 .mtoc--open .mtoc__fab {
-  background: var(--ink);
+  background: var(--paper-raised);
   border-color: var(--ink);
-  color: var(--paper);
+  color: var(--ink);
 }
 
 /* ── 目录面板 ────────────────────────────────────────────────── */
@@ -245,7 +249,9 @@ onBeforeUnmount(() => {
 .mtoc__panel {
   position: fixed;
   right: max(0.9rem, env(safe-area-inset-right));
-  bottom: calc(max(0.9rem, env(safe-area-inset-bottom)) + 3.8rem);
+  bottom: calc(
+    max(0.9rem, env(safe-area-inset-bottom)) + var(--mtoc-lift) + 3.8rem
+  );
   left: max(0.9rem, env(safe-area-inset-left));
   z-index: 1;
   display: flex;
