@@ -106,7 +106,7 @@ const en: UiStrings = {
   motto: ['Create freely', 'Disclose voluntarily'],
 
   versioned: (version) => `AICD ${version}`,
-  involvement: (code, name) => `AI involvement: ${code} (${name})`,
+  involvement: (code, name) => `AI participation: ${code} (${name})`,
   reviewPart: (yes) => `Human review: ${yes ? 'Yes' : 'No'}`,
   toolPart: (tool) => `AI tool: ${tool}`,
   purposePart: (purpose) => `Purpose: ${purpose}`,
@@ -114,7 +114,7 @@ const en: UiStrings = {
   yes: 'Yes',
   no: 'No',
 
-  builderLevel: 'AI involvement',
+  builderLevel: 'AI participation',
   builderReview: 'Human review',
   builderTool: 'AI tool',
   builderPurpose: 'Purpose',
@@ -158,7 +158,7 @@ const en: UiStrings = {
       <h1>An article</h1>
       <p>Body text…</p>
 
-      <p>AICD 1.0 · AI involvement: A3 (Partially AI-generated) · Human review: Yes</p>
+      <p>AICD 1.0 · AI participation: A3 (Partially AI-generated) · Human review: Yes</p>
       <p>AI tool: a generative AI model</p>
       <p>Purpose: language polishing and restructuring</p>
     </article>
@@ -175,7 +175,7 @@ const en: UiStrings = {
   verifierRawPrefix: (raw) => `raw: ${raw}`,
   fieldLabels: {
     version: 'Version',
-    level: 'AI involvement',
+    level: 'AI participation',
     review: 'Human review',
     tool: 'AI tool',
     purpose: 'Purpose'
@@ -194,7 +194,7 @@ const en: UiStrings = {
       `“${label}” in ${source} could not be read: “${raw}”.`,
     conflict: (label, values) =>
       `“${label}” differs between carriers: ${values}.`,
-    noLevel: 'AI involvement (aicd-level) is not declared.',
+    noLevel: 'AI participation (aicd-level) is not declared.',
     noReview: 'Whether the content was human-reviewed (aicd-review) is not declared.',
     noVersion: 'The AICD version (aicd-version) is not declared.',
     versionMismatch: (version) =>

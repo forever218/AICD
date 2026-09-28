@@ -6,6 +6,7 @@
  *   2. JSON / JSON-LD —— { "aicd": "1.0", "level": "A3", "review": true }
  *   3. HTTP Header 形式 —— AICD: 1.0; level=A3; review=yes
  *   4. 面向读者的可见声明 —— AICD 1.0 · AI 参与：A3（AI 部分生成）· 人工审核：是
+ *      也接受极简行 AICD 1.0 A3，以及英文的 AI involvement / AI participation 两种写法
  *
  * 识别规则本身是跨语言的（中英繁的字段名都会认）；
  * 只有输出给读者看的措辞跟随 language。
@@ -111,7 +112,7 @@ function isQualified(raw: string): boolean {
 /* ── 取值归一化 ─────────────────────────────────────────────── */
 
 const CUT_WORDS =
-  /(?:用途|purpose|人工审核|人工審核|human\s*review|AI\s*参与|AI\s*參與|AI\s*involvement|AI\s*工具|AI\s*tool|AI\s*Disclosure)\s*[:：]/
+  /(?:用途|purpose|人工审核|人工審核|human\s*review|AI\s*参与|AI\s*參與|AI\s*involvement|AI\s*participation|AI\s*工具|AI\s*tool|AI\s*Disclosure)\s*[:：]/
 
 /** 可见声明里的自由文本：去掉尾随标点，以及被顺带吞进来的后续标签 */
 function cleanText(text: string): string {
@@ -130,6 +131,8 @@ function normalize(key: FieldKey, raw: string): string {
       return m ? m[0] : ''
     }
     case 'level': {
+      /* 未确认用 A?（也接受全角问号） */
+      if (/A\s*[?？]/i.test(text)) return 'A?'
       const m = text.toUpperCase().match(/A\s*([0-5])(?![0-9])/)
       return m ? `A${m[1]}` : ''
     }
@@ -256,11 +259,18 @@ function readScripts(text: string, hits: DisclosureHit[], flags: ReadFlags) {
 
 /* ── 载体四：面向读者的可见声明 ─────────────────────────────── */
 
-/* 三个语种的写法都要认 */
+/* 三个语种的写法都要认。英文正文用 participation，生成器早期用 involvement，
+   两种写法都收；A? 也在这里被接受。 */
+const LV = 'A\\s*(?:[0-5]|[?？])'
 const VISIBLE_LEVEL = [
-  /AI\s*(?:参与|參與|involvement)\s*[:：]\s*(A\s*[0-5])/i,
-  /AI\s*Disclosure\s*[:：]\s*(A\s*[0-5])/i
+  new RegExp(`AI\\s*(?:参与|參與|involvement|participation)\\s*[:：]\\s*(${LV})`, 'i'),
+  new RegExp(`AI\\s*Disclosure\\s*[:：]\\s*(${LV})`, 'i')
 ]
+/* 极简披露行：AICD 1.0 A2 —— 版本号后面直接跟等级码，没有字段名 */
+const VISIBLE_COMPACT = new RegExp(
+  `AICD\\s+(\\d+(?:\\.\\d+)*)\\s*[·|,;、/／]*\\s*(${LV})(?![\\w])`,
+  'i'
+)
 const VISIBLE_VERSION = /AICD\s+(\d+(?:\.\d+)*)/i
 const VISIBLE_REVIEW =
   /(?:人工审核|人工審核|human\s*review)\s*[:：]\s*(是|否|yes|no|true|false|没有|沒有)/i
@@ -277,16 +287,31 @@ function readVisible(text: string, hits: DisclosureHit[]) {
     .replace(/&(?:middot|#183|#xB7);/gi, '·')
     .replace(/&amp;/gi, '&')
 
-  let level: RegExpExecArray | null = null
+  /* 具名写法：AI 参与：A2 / AI involvement: A2 / AI participation: A2 / AI Disclosure: A2 */
+  let levelRaw = ''
   for (const re of VISIBLE_LEVEL) {
-    level = re.exec(plain)
-    if (level) break
+    const m = re.exec(plain)
+    if (m) {
+      levelRaw = m[1]
+      break
+    }
   }
-  if (level) {
-    hits.push({ key: 'level', raw: level[1], channel: 'visible' })
-    const version = VISIBLE_VERSION.exec(plain)
-    if (version) hits.push({ key: 'version', raw: version[1], channel: 'visible' })
+
+  /* 版本与等级各自独立入栈：只有版本、没有等级时也能读出版本，
+     以便给出「未声明参与程度」而不是「未发现披露」。 */
+  let versionRaw = ''
+  const compact = VISIBLE_COMPACT.exec(plain)
+  if (compact) {
+    versionRaw = compact[1]
+    if (!levelRaw) levelRaw = compact[2]
   }
+  if (!versionRaw) {
+    const v = VISIBLE_VERSION.exec(plain)
+    if (v) versionRaw = v[1]
+  }
+
+  if (levelRaw) hits.push({ key: 'level', raw: levelRaw, channel: 'visible' })
+  if (versionRaw) hits.push({ key: 'version', raw: versionRaw, channel: 'visible' })
 
   const review = VISIBLE_REVIEW.exec(plain)
   if (review) hits.push({ key: 'review', raw: review[1], channel: 'visible' })

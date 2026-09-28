@@ -269,3 +269,64 @@
     gap: 0.3rem;
   }
 }
+
+/* ── 反馈按钮（关于页）──────────────────────────────────────── */
+
+.vp-doc .gh-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.72rem;
+  max-width: 100%;
+  margin: 0.35rem 0 0;
+  padding: 1rem 1.9rem;
+  border: 1px solid var(--ink);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--font-serif);
+  font-size: 1.06rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-decoration: none;
+  transition:
+    transform 260ms var(--ease),
+    box-shadow 260ms var(--ease),
+    background-color 260ms var(--ease),
+    color 260ms var(--ease),
+    border-color 260ms var(--ease);
+}
+
+.vp-doc .gh-cta:hover {
+  color: var(--paper);
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px -20px oklch(0 0 0 / 0.62);
+}
+
+.vp-doc .gh-cta:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.gh-cta__icon {
+  flex: none;
+  width: 1.15em;
+  height: 1.15em;
+}
+
+.gh-cta__label {
+  white-space: nowrap;
+}
+
+@media (max-width: 420px) {
+  .vp-doc .gh-cta {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem 1.2rem;
+    font-size: 1rem;
+  }
+
+  .gh-cta__label {
+    white-space: normal;
+  }
+}

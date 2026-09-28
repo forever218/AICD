@@ -4,7 +4,9 @@ headingMark: false
 ---
 
 
-AICD 用六個等級描述人工智能在創作過程中的參與程度
+AICD 用六個等級描述人工智能在創作過程中的參與程度，另有 A? 用於發布者無法確認的情形
+
+<p class="page-head__note">AICD 1.0 目前僅為文字內容劃分等級。後續迭代將逐步納入圖像、音訊、視訊等更多媒介。</p>
 
 <LevelReference />
 

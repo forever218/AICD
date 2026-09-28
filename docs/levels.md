@@ -4,7 +4,9 @@ headingMark: false
 ---
 
 
-AICD uses six levels to describe how far artificial intelligence took part in the creation process
+AICD uses six levels to describe how far artificial intelligence took part in the creation process, plus A? for what the publisher cannot confirm
+
+<p class="page-head__note">AICD 1.0 defines levels for text only. Later revisions will extend the scale to images, audio, video, and other media.</p>
 
 <LevelReference />
 
