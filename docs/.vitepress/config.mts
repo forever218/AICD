@@ -1,16 +1,17 @@
 import { defineConfig } from 'vitepress'
 
 /**
- * 三语站点。
+ * 四语站点。
  * 默认语言是英文（VitePress 的 root locale，路径不带前缀）；
- * 简体中文在 /zh/，繁體中文在 /zh-tw/。
+ * 简体中文在 /zh/，繁體中文在 /zh-tw/，日本語在 /ja/。
  */
 
 const DESCRIPTION = {
   en: 'AICD 1.0 — the AI Content Disclosure Protocol. A wholly voluntary, open, non-profit principle of AI transparency: if artificial intelligence took part in creating content, creators who follow this protocol can tell their readers so.',
   zh: 'AICD 1.0 — 人工智能内容主动披露协议。一项完全自愿、开放、非营利的 AI 内容透明原则：如果人工智能参与了内容创作，愿意遵循本协议的创作者可以主动告诉读者。',
   'zh-tw':
-    'AICD 1.0 — 人工智能內容主動披露協議。一項完全自願、開放、非營利的 AI 內容透明原則：如果人工智能參與了內容創作，願意遵循本協議的創作者可以主動告訴讀者。'
+    'AICD 1.0 — 人工智能內容主動披露協議。一項完全自願、開放、非營利的 AI 內容透明原則：如果人工智能參與了內容創作，願意遵循本協議的創作者可以主動告訴讀者。',
+  ja: 'AICD 1.0 — AIコンテンツ自主開示プロトコル。完全に任意で、開かれた、非営利の AI 透明性の原則です。人工知能がコンテンツ制作に関与した場合、本プロトコルに賛同する作り手は、その事実を読者に自主的に伝えることができます。'
 }
 
 /** 各语言共用的 head：站点自身的机器可读披露示例 */
@@ -28,10 +29,24 @@ const sharedHead: any[] = [
   ['meta', { name: 'twitter:card', content: 'summary' }]
 ]
 
-const headFor = (locale: 'en' | 'zh' | 'zh-tw', ogTitle: string, workName: string) => [
+const OG_LOCALE: Record<'en' | 'zh' | 'zh-tw' | 'ja', string> = {
+  en: 'en_US',
+  zh: 'zh_CN',
+  'zh-tw': 'zh_TW',
+  ja: 'ja_JP'
+}
+
+const IN_LANGUAGE: Record<'en' | 'zh' | 'zh-tw' | 'ja', string> = {
+  en: 'en',
+  zh: 'zh-Hans',
+  'zh-tw': 'zh-Hant',
+  ja: 'ja'
+}
+
+const headFor = (locale: 'en' | 'zh' | 'zh-tw' | 'ja', ogTitle: string, workName: string) => [
   ['meta', { property: 'og:title', content: ogTitle }],
   ['meta', { property: 'og:description', content: DESCRIPTION[locale] }],
-  ['meta', { property: 'og:locale', content: locale === 'zh-tw' ? 'zh_TW' : locale === 'zh' ? 'zh_CN' : 'en_US' }],
+  ['meta', { property: 'og:locale', content: OG_LOCALE[locale] }],
   [
     'script',
     { type: 'application/ld+json' },
@@ -43,9 +58,9 @@ const headFor = (locale: 'en' | 'zh' | 'zh-tw', ogTitle: string, workName: strin
       alternateName2: 'AICD',
       version: '1.0',
       datePublished: '2026',
-      inLanguage: locale === 'zh-tw' ? 'zh-Hant' : locale === 'zh' ? 'zh-Hans' : 'en',
+      inLanguage: IN_LANGUAGE[locale],
       abstract: DESCRIPTION[locale],
-      keywords: 'AI disclosure, 内容披露, AICD, content transparency, AI 参与程度'
+      keywords: 'AI disclosure, 内容披露, AICD, content transparency, AI 参与程度, AI 関与'
     })
   ]
 ]
@@ -176,6 +191,39 @@ export default defineConfig({
           message:
             '本站正文由LiSR撰寫 AICD 1.0 A2',
           copyright: 'AICD · 人工智能內容主動披露協議'
+        }
+      }
+    },
+
+    /* ── 日本語 ─────────────────────────────────────────── */
+    ja: {
+      label: '日本語',
+      lang: 'ja-JP',
+      link: '/ja/',
+      title: 'AICD',
+      titleTemplate: ':title · AICD',
+      description: DESCRIPTION.ja,
+      head: headFor('ja', 'AIコンテンツ自主開示プロトコル · AICD 1.0', 'AIコンテンツ自主開示プロトコル'),
+      themeConfig: {
+        nav: [
+          { text: '本文', link: '/ja/protocol/' },
+          { text: 'レベル', link: '/ja/levels' },
+          { text: '採用', link: '/ja/adopt' },
+          { text: '検証', link: '/ja/verifier' },
+          { text: 'AICDについて', link: '/ja/about' }
+        ],
+        outline: { level: [2, 3], label: 'このページ' },
+        docFooter: { prev: '前へ', next: '次へ' },
+        returnToTopLabel: 'トップへ戻る',
+        sidebarMenuLabel: 'メニュー',
+        darkModeSwitchLabel: '外観',
+        lightModeSwitchTitle: 'ライト',
+        darkModeSwitchTitle: 'ダーク',
+        langMenuLabel: '言語を切り替える',
+        footer: {
+          message:
+            '本サイトの本文は LiSR が執筆 AICD 1.0 A2',
+          copyright: 'AICD · AIコンテンツ自主開示プロトコル'
         }
       }
     }

@@ -1,16 +1,16 @@
 /**
  * AICD · 站点文案
  *
- * 三个语言：root（English，默认）、zh（简体中文）、zh-tw（繁體中文）。
+ * 四个语言：root（English，默认）、zh（简体中文）、zh-tw（繁體中文）、ja（日本語）。
  * 组件的可见文字一律从这里取，不再散落在模板里。
  */
 
 import { computed } from 'vue'
 import { useData } from 'vitepress'
 
-export type LocaleKey = 'root' | 'zh' | 'zh-tw'
+export type LocaleKey = 'root' | 'zh' | 'zh-tw' | 'ja'
 
-export const LOCALE_KEYS: LocaleKey[] = ['root', 'zh', 'zh-tw']
+export const LOCALE_KEYS: LocaleKey[] = ['root', 'zh', 'zh-tw', 'ja']
 
 export function asLocaleKey(value: string | undefined): LocaleKey {
   return LOCALE_KEYS.includes(value as LocaleKey) ? (value as LocaleKey) : 'root'
@@ -95,6 +95,12 @@ export interface UiStrings {
     headerForm: string
     brokenJson: string
   }
+
+  /* ── 全站声明 · 样式预览 ───────────────────────────────── */
+  previewLight: string
+  previewDark: string
+  previewReset: string
+  previewHint: string
 }
 
 /* ── English（默认） ───────────────────────────────────────── */
@@ -126,6 +132,11 @@ const en: UiStrings = {
   outputJson: 'Machine-readable fields',
   copy: 'Copy',
   copied: 'Copied',
+
+  previewLight: 'Light',
+  previewDark: 'Dark',
+  previewReset: 'Follow this site',
+  previewHint: 'Rendered from the code above — the styles are yours to change',
 
   verifierSource: 'Source',
   verifierPlaceholder: 'Paste HTML source containing an AICD statement',
@@ -236,6 +247,11 @@ const zh: UiStrings = {
   copy: '复制',
   copied: '已复制',
 
+  previewLight: '浅色',
+  previewDark: '深色',
+  previewReset: '跟随本站',
+  previewHint: '以下预览由上方的代码渲染，样式可自由调整',
+
   verifierSource: '源码',
   verifierPlaceholder: '粘贴包含 AICD 声明的 HTML 源码',
   verifierRun: '验证声明',
@@ -342,6 +358,11 @@ const zhTw: UiStrings = {
   copy: '複製',
   copied: '已複製',
 
+  previewLight: '淺色',
+  previewDark: '深色',
+  previewReset: '跟隨本站',
+  previewHint: '以下預覽由上方程式碼渲染，樣式可自由調整',
+
   verifierSource: '原始碼',
   verifierPlaceholder: '貼上包含 AICD 宣告的 HTML 原始碼',
   verifierRun: '驗證宣告',
@@ -418,8 +439,120 @@ const zhTw: UiStrings = {
   }
 }
 
+/* ── 日本語 ───────────────────────────────────────────────── */
+
+const ja: UiStrings = {
+  langLabel: '言語を切り替える',
+
+  homeLatin: 'AIコンテンツ自主開示プロトコル',
+  motto: ['Create freely', 'Disclose voluntarily'],
+
+  versioned: (version) => `AICD ${version}`,
+  involvement: (code, name) => `AI 関与：${code}（${name}）`,
+  reviewPart: (yes) => `人による確認：${yes ? 'あり' : 'なし'}`,
+  toolPart: (tool) => `AI ツール：${tool}`,
+  purposePart: (purpose) => `用途：${purpose}`,
+  compactLevel: (code) => `AI 開示：${code}`,
+  yes: 'あり',
+  no: 'なし',
+
+  builderLevel: 'AI 関与',
+  builderReview: '人による確認',
+  builderTool: 'AI ツール',
+  builderPurpose: '用途',
+  builderOptional: '（任意）',
+  placeholderTool: '例：生成 AI モデル',
+  placeholderPurpose: '例：文章の推敲と構成の調整',
+  outputLine: '標準の開示行',
+  outputCompact: '最小限の開示行',
+  outputJson: '機械可読フィールド',
+  copy: 'コピー',
+  copied: 'コピーしました',
+
+  previewLight: 'ライト',
+  previewDark: 'ダーク',
+  previewReset: 'このサイトに合わせる',
+  previewHint: '以下のプレビューは上のコードをそのまま描画したものです。スタイルは自由に変更できます',
+
+  verifierSource: 'ソース',
+  verifierPlaceholder: 'AICD の宣言を含む HTML ソースを貼り付けてください',
+  verifierRun: '宣言を検証',
+  verifierSample: 'サンプルを読み込む',
+  verifierSampleHtml: `<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <title>ある記事</title>
+
+    <!-- AICD: 1.0; level=A3; review=yes -->
+
+    <meta name="aicd-version" content="1.0" />
+    <meta name="aicd-level" content="A3" />
+    <meta name="aicd-review" content="yes" />
+
+    <script type="application/ld+json">
+      {
+        "aicd": "1.0",
+        "level": "A3",
+        "review": true,
+        "tool": "ある生成 AI モデル",
+        "purpose": "文章の推敲と構成の調整"
+      }
+    <\/script>
+  </head>
+  <body>
+    <article>
+      <h1>ある記事</h1>
+      <p>本文……</p>
+
+      <p>AICD 1.0 · AI 関与：A3（AI による部分生成）· 人による確認：あり</p>
+      <p>AI ツール：ある生成 AI モデル</p>
+      <p>用途：文章の推敲と構成の調整</p>
+    </article>
+  </body>
+</html>
+`,
+  verifierEmptyInput: '先に検証するソースを貼り付けてください。',
+  verifierFound: 'AICD の宣言が見つかりました',
+  verifierNotFound: 'AICD の宣言は見つかりませんでした',
+  verifierFields: 'フィールドの詳細',
+  verifierNormalized: '正規化フィールド',
+  verifierIssues: '確認しておきたい点',
+  verifierUnreadable: '判読できません',
+  verifierRawPrefix: (raw) => `原文：${raw}`,
+  fieldLabels: {
+    version: 'バージョン',
+    level: 'AI 関与度',
+    review: '人による確認',
+    tool: 'AI ツール',
+    purpose: '用途'
+  },
+  channels: {
+    meta: 'HTML Meta',
+    json: 'JSON',
+    jsonld: 'JSON-LD',
+    header: 'HTTP ヘッダー形式',
+    visible: '可視の宣言',
+    jsonInput: 'JSON 入力'
+  },
+  issue: {
+    none: 'ソースに AICD のフィールドは見つかりませんでした。',
+    unreadable: (label, source, raw) => `${source}の「${label}」の値を判読できません：「${raw}」。`,
+    conflict: (label, values) => `「${label}」の値が媒体によって一致しません：${values}。`,
+    noLevel: 'AI 関与度（aicd-level）が宣言されていません。',
+    noReview: '人による確認の有無（aicd-review）が宣言されていません。',
+    noVersion: 'AICD のバージョン（aicd-version）が宣言されていません。',
+    versionMismatch: (version) => `バージョン「${version}」は公開中の 1.0 と一致しません。`,
+    onlyVisible: '読者向けの可視の宣言のみで、機械可読フィールドがありません。',
+    headerForm:
+      'ソースにレスポンスヘッダー形式の宣言がありますが、ここではソースのテキストしか読めません。実際のレスポンスヘッダーは curl -I などで確認してください。',
+    brokenJson: 'application/ld+json ブロックがありますが、内容が正しい JSON ではありません。'
+  }
+}
+
 export const STRINGS: Record<LocaleKey, UiStrings> = {
   root: en,
   zh,
-  'zh-tw': zhTw
+  'zh-tw': zhTw,
+  ja
 }

@@ -6,9 +6,10 @@
  *   2. JSON / JSON-LD —— { "aicd": "1.0", "level": "A3", "review": true }
  *   3. HTTP Header 形式 —— AICD: 1.0; level=A3; review=yes
  *   4. 面向读者的可见声明 —— AICD 1.0 · AI 参与：A3（AI 部分生成）· 人工审核：是
- *      也接受极简行 AICD 1.0 A3，以及英文的 AI involvement / AI participation 两种写法
+ *      也接受极简行 AICD 1.0 A3，以及英文的 AI involvement / AI participation、
+ *      日文的 AI 関与：A3 等写法
  *
- * 识别规则本身是跨语言的（中英繁的字段名都会认）；
+ * 识别规则本身是跨语言的（中英繁日的字段名都会认）；
  * 只有输出给读者看的措辞跟随 language。
  */
 
@@ -68,6 +69,7 @@ const ALIASES: Record<string, FieldKey> = {
   version: 'version',
   ver: 'version',
   版本: 'version',
+  バージョン: 'version',
   level: 'level',
   participation: 'level',
   等级: 'level',
@@ -76,21 +78,28 @@ const ALIASES: Record<string, FieldKey> = {
   參與程度: 'level',
   参与: 'level',
   參與: 'level',
+  関与: 'level',
+  関与度: 'level',
   review: 'review',
   reviewed: 'review',
   审核: 'review',
   審核: 'review',
   人工审核: 'review',
   人工審核: 'review',
+  確認: 'review',
+  レビュー: 'review',
+  人による確認: 'review',
   tool: 'tool',
   tools: 'tool',
   model: 'tool',
   工具: 'tool',
   模型: 'tool',
+  ツール: 'tool',
   purpose: 'purpose',
   use: 'purpose',
   usage: 'purpose',
-  用途: 'purpose'
+  用途: 'purpose',
+  目的: 'purpose'
 }
 
 const stripPrefix = (name: string) => name.trim().toLowerCase().replace(/^aicd[\s\-_:.]*/, '')
@@ -112,7 +121,7 @@ function isQualified(raw: string): boolean {
 /* ── 取值归一化 ─────────────────────────────────────────────── */
 
 const CUT_WORDS =
-  /(?:用途|purpose|人工审核|人工審核|human\s*review|AI\s*参与|AI\s*參與|AI\s*involvement|AI\s*participation|AI\s*工具|AI\s*tool|AI\s*Disclosure)\s*[:：]/
+  /(?:用途|目的|purpose|人工审核|人工審核|human\s*review|人による確認|レビュー|AI\s*参与|AI\s*參與|AI\s*involvement|AI\s*participation|AI\s*関与(?:度)?|AI\s*工具|AI\s*tool|AI\s*ツール|AI\s*Disclosure|AI\s*開示)\s*[:：]/
 
 /** 可见声明里的自由文本：去掉尾随标点，以及被顺带吞进来的后续标签 */
 function cleanText(text: string): string {
@@ -138,8 +147,9 @@ function normalize(key: FieldKey, raw: string): string {
     }
     case 'review': {
       const v = text.toLowerCase().replace(/[\s。.．]+/g, '')
-      if (['yes', 'y', 'true', '1', '是', '有'].includes(v)) return 'y'
-      if (['no', 'n', 'false', '0', '否', '无', '沒有', '没有'].includes(v)) return 'n'
+      if (['yes', 'y', 'true', '1', '是', '有', 'あり', 'はい', '有り'].includes(v)) return 'y'
+      if (['no', 'n', 'false', '0', '否', '无', '沒有', '没有', 'なし', 'いいえ', '無', '無し'].includes(v))
+        return 'n'
       return ''
     }
     default:
@@ -259,12 +269,12 @@ function readScripts(text: string, hits: DisclosureHit[], flags: ReadFlags) {
 
 /* ── 载体四：面向读者的可见声明 ─────────────────────────────── */
 
-/* 三个语种的写法都要认。英文正文用 participation，生成器早期用 involvement，
-   两种写法都收；A? 也在这里被接受。 */
+/* 四个语种的写法都要认（中 / 繁 / 英 / 日）。英文正文用 participation，
+   生成器早期用 involvement，两种写法都收；A? 也在这里被接受。 */
 const LV = 'A\\s*(?:[0-5]|[?？])'
 const VISIBLE_LEVEL = [
-  new RegExp(`AI\\s*(?:参与|參與|involvement|participation)\\s*[:：]\\s*(${LV})`, 'i'),
-  new RegExp(`AI\\s*Disclosure\\s*[:：]\\s*(${LV})`, 'i')
+  new RegExp(`AI\\s*(?:参与|參與|involvement|participation|関与度|関与)\\s*[:：]\\s*(${LV})`, 'i'),
+  new RegExp(`AI\\s*(?:Disclosure|開示)\\s*[:：]\\s*(${LV})`, 'i')
 ]
 /* 极简披露行：AICD 1.0 A2 —— 版本号后面直接跟等级码，没有字段名 */
 const VISIBLE_COMPACT = new RegExp(
@@ -273,9 +283,9 @@ const VISIBLE_COMPACT = new RegExp(
 )
 const VISIBLE_VERSION = /AICD\s+(\d+(?:\.\d+)*)/i
 const VISIBLE_REVIEW =
-  /(?:人工审核|人工審核|human\s*review)\s*[:：]\s*(是|否|yes|no|true|false|没有|沒有)/i
-const VISIBLE_TOOL = /AI\s*(?:工具|tool)\s*[:：]\s*([^\r\n<>·|]{1,120})/i
-const VISIBLE_PURPOSE = /(?:^|[\s>·|])(?:用途|purpose)\s*[:：]\s*([^\r\n<>·|]{1,120})/i
+  /(?:人工审核|人工審核|human\s*review|人による確認|レビュー)\s*[:：]\s*(是|否|yes|no|true|false|没有|沒有|あり|なし|はい|いいえ)/i
+const VISIBLE_TOOL = /AI\s*(?:工具|tool|ツール)\s*[:：]\s*([^\r\n<>·|]{1,120})/i
+const VISIBLE_PURPOSE = /(?:^|[\s>·|])(?:用途|目的|purpose)\s*[:：]\s*([^\r\n<>·|]{1,120})/i
 
 function readVisible(text: string, hits: DisclosureHit[]) {
   // 只保留“真正看得见”的文字：剔除 script / style / 注释 / 标签
@@ -287,7 +297,8 @@ function readVisible(text: string, hits: DisclosureHit[]) {
     .replace(/&(?:middot|#183|#xB7);/gi, '·')
     .replace(/&amp;/gi, '&')
 
-  /* 具名写法：AI 参与：A2 / AI involvement: A2 / AI participation: A2 / AI Disclosure: A2 */
+  /* 具名写法：AI 参与：A2 / AI involvement: A2 / AI participation: A2 /
+     AI Disclosure: A2 / AI 関与：A2 / AI 開示：A2 */
   let levelRaw = ''
   for (const re of VISIBLE_LEVEL) {
     const m = re.exec(plain)

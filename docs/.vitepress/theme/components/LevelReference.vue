@@ -33,16 +33,18 @@ const items = computed(() => levelsFor(lang.value))
 .ref__head {
   display: flex;
   align-items: baseline;
-  gap: 1rem;
-  margin-bottom: 0.7rem;
+  gap: 1.15rem;
+  margin-bottom: 0.85rem;
 }
 
 .ref__code {
   font-family: var(--font-mono);
-  font-size: 0.98rem;
-  letter-spacing: 0.1em;
+  font-size: clamp(1.85rem, 1.3rem + 2.2vw, 2.7rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: 0.02em;
   color: var(--seal-ink);
-  min-width: 2.6rem;
+  min-width: 3.5rem;
 }
 
 .ref__name {

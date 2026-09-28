@@ -5,3 +5,4 @@ docs/.vitepress/cache
 *.log
 .workbuddy
 .shots
+.vitepress

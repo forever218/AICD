@@ -30,6 +30,19 @@
   --doc-pad-top: clamp(1.7rem, 3.4vh, 2.4rem);
 }
 
+/* ── 日本語 ─────────────────────────────────────────────────
+   不额外下载字体包：系统里有日文明朝体就优先用（macOS 的ヒラギノ、
+   Windows 的游明朝），没有则回落到已引入的 Noto Serif SC——
+   个别汉字字形略偏中文字形，但不会缺字。 */
+html[lang^='ja'] {
+  --font-serif: 'Newsreader Variable', 'Noto Serif JP', 'Hiragino Mincho ProN',
+    'Hiragino Mincho Pro', 'Yu Mincho', 'YuMincho', 'Noto Serif SC',
+    'Source Han Serif SC', Georgia, serif;
+  /* IBM Plex Mono 不含假名，假名交给日文明朝体，拉丁仍走等宽 */
+  --font-mono: 'IBM Plex Mono', 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho',
+    ui-monospace, 'SFMono-Regular', Consolas, 'Liberation Mono', monospace;
+}
+
 /* ── 明亮：暖白纸 ─────────────────────────────────────────── */
 :root {
   color-scheme: light;

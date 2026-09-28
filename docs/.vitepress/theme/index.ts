@@ -26,6 +26,7 @@ import BadgeBuilder from './components/BadgeBuilder.vue'
 import Verifier from './components/Verifier.vue'
 import LangSwitch from './components/LangSwitch.vue'
 import AboutAvatars from './components/AboutAvatars.vue'
+import SiteWidePreview from './components/SiteWidePreview.vue'
 
 export default {
   extends: DefaultTheme,
@@ -40,5 +41,6 @@ export default {
     app.component('Verifier', Verifier)
     app.component('LangSwitch', LangSwitch)
     app.component('AboutAvatars', AboutAvatars)
+    app.component('SiteWidePreview', SiteWidePreview)
   }
 } satisfies Theme

@@ -1,15 +1,14 @@
 ---
-title: 采用
+title: 採用
 ---
 
-
-任何个人或组织均可以采用 AICD
+個人でも組織でも AICD を採用することができます
 
 <BadgeBuilder />
 
-## 机器可读 {#machine}
+## 機械可読 {#machine}
 
-除面向读者的可见标识外，可以把同样的信息放进页面元数据
+読者に向けた表示に加えて、同じ情報をページのメタデータに置くことができます
 
 ### HTML Metadata
 
@@ -26,8 +25,8 @@ title: 采用
   "aicd": "1.0",
   "level": "A3",
   "review": true,
-  "tool": "某生成式 AI 模型",
-  "purpose": "语言润色与结构调整"
+  "tool": "ある生成 AI モデル",
+  "purpose": "文章の推敲と構成の調整"
 }
 ```
 
@@ -37,20 +36,20 @@ title: 采用
 AICD: 1.0; level=A3; review=yes
 ```
 
-## 全站声明 {#sitewide}
+## サイト全体の宣言 {#sitewide}
 
-如果网站全站都遵循 AICD，可以设立一个独立页面（例如 `/aicd`）
+ウェブサイト全体が AICD を採用する場合は、専用のページを公開できます。たとえば /aicd のような場所です
 
 ```html
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="ja">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>本站遵循 AICD 1.0</title>
-<meta name="description" content="本站全站遵循 AICD 人工智能内容主动披露协议。">
+<title>このサイトは AICD 1.0 に準拠しています</title>
+<meta name="description" content="このサイトは、サイト全体で AICD AIコンテンツ自主開示プロトコルに準拠しています。">
 
-<!-- 可选的机器可读字段，请改成你站点的实际情况 -->
+<!-- optional machine-readable fields — change them to match your site -->
 <meta name="aicd-version" content="1.0">
 <meta name="aicd-level" content="A2">
 <meta name="aicd-review" content="yes">
@@ -82,7 +81,7 @@ AICD: 1.0; level=A3; review=yes
     padding: 2.5rem 1.25rem;
     background: var(--paper);
     color: var(--ink);
-    font: 16px/1.8 Georgia, "Songti SC", "Noto Serif SC", serif;
+    font: 16px/1.8 Georgia, "Hiragino Mincho ProN", "Yu Mincho", "Noto Serif JP", "Songti SC", "Noto Serif SC", serif;
     -webkit-font-smoothing: antialiased;
   }
   .sheet {
@@ -161,35 +160,35 @@ AICD: 1.0; level=A3; review=yes
   <main class="sheet">
     <h1 class="sheet__title">AICD 1.0</h1>
     <hr class="sheet__mark">
-    <p class="sheet__claim">本站全站遵循 AICD 协议。</p>
-    <p class="sheet__about">AICD 是一份完全自愿、开放、非营利的 AI 内容披露协议：当人工智能参与了内容创作，创作者可以主动告知读者，并说明人工智能的参与程度。它不做检测，也不做认证。</p>
+    <p class="sheet__claim">このサイトは、サイト全体で AICD プロトコルに準拠しています。</p>
+    <p class="sheet__about">AICD は、AI コンテンツの開示に関する完全に任意の、開かれた、非営利のプロトコルです。人工知能がコンテンツ制作に関与した場合、作り手はそのことを読者に伝え、AI がどの程度関与したかを説明することができます。AI を検出するものではなく、何かを認証するものでもありません。</p>
     <ul class="sheet__levels">
-      <li><b>A0</b><span>未使用 AI</span></li>
-      <li><b>A1</b><span>AI 辅助</span></li>
-      <li><b>A2</b><span>AI 编辑</span></li>
-      <li><b>A3</b><span>AI 部分生成</span></li>
-      <li><b>A4</b><span>AI 主要生成</span></li>
-      <li><b>A5</b><span>AI 生成</span></li>
-      <li><b>A?</b><span>未确认</span></li>
+      <li><b>A0</b><span>AI 不使用</span></li>
+      <li><b>A1</b><span>AI による補助</span></li>
+      <li><b>A2</b><span>AI による編集</span></li>
+      <li><b>A3</b><span>AI による部分生成</span></li>
+      <li><b>A4</b><span>AI による主要生成</span></li>
+      <li><b>A5</b><span>AI による生成</span></li>
+      <li><b>A?</b><span>未確認</span></li>
     </ul>
     <p class="sheet__foot">
-      AICD 1.0 · 发布 2026.9.26<br>
-      本页为自愿遵循声明，不构成 AICD 认证或背书<br>
-      <a href="https://github.com/forever218/AICD">了解协议全文</a>
+      AICD 1.0 · 発行 2026.9.26<br>
+      任意の宣言であり、AICD の認証や推奨ではありません<br>
+      <a href="https://github.com/forever218/AICD">プロトコルを読む</a>
     </p>
   </main>
 </body>
 </html>
 ```
 
-上面的页面是自愿遵循声明，不构成 AICD 认证或背书。若只有部分栏目遵循 AICD，请在页面中写明适用范围。
+上のページは任意の宣言であり、AICD の認証や推奨ではありません。サイトの一部のみが AICD に準拠する場合は、その範囲をページに明記してください。
 
-### 样式预览 {#sitewide-preview}
+### スタイルプレビュー {#sitewide-preview}
 
 <SiteWidePreview />
 
-## 互操作 {#interop}
+## 相互運用性 {#interop}
 
-AICD 复用现有数字内容溯源技术。数字签名、来源证明、内容完整性验证等需求，建议与 C2PA、Content Credentials、W3C 等成熟开放标准配合使用。
+AICD は既存のデジタルコンテンツ来歴技術を再利用します。電子署名、来歴の証明、内容の完全性には、C2PA、Content Credentials、W3C などの成熟したオープン標準と組み合わせてください。
 
-[回到协议全文 →](/zh/protocol/#adoption)
+[プロトコル全文へ →](/ja/protocol/#adoption)
