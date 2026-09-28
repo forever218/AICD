@@ -8,6 +8,8 @@ Published 2026.9.26
 
 Effective 2026.9.26
 
+The Simplified Chinese version is the sole authoritative version of this Protocol
+
 ## 1. Purpose {#purpose}
 
 Generative artificial intelligence is gradually becoming a common tool in the creation of text, images, audio, video, and other digital content. AI can be used for ideation, retrieval, translation, organization, polishing, rewriting, and can also directly participate in the generation of part or even all of the content. As AI becomes more deeply involved in content production, readers, viewers, and content users may be unable to judge from the final work alone what role AI played in it. AICD (AI Content Disclosure Protocol) therefore proposes a simple, open, and voluntary content transparency principle: ***When AI has actually participated in content creation, content creators or publishers may proactively disclose this fact to the public and, within reasonable bounds, explain the manner and degree of AI participation.***
