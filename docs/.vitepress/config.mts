@@ -7,10 +7,10 @@ import { defineConfig } from 'vitepress'
  */
 
 const DESCRIPTION = {
-  en: 'AICD 1.0 — the AI Content Disclosure Initiative. A wholly voluntary, open, non-profit principle of AI transparency: if artificial intelligence took part in creating content, creators who follow this initiative can tell their readers so.',
-  zh: 'AICD 1.0 — 人工智能内容主动披露倡议。一项完全自愿、开放、非营利的 AI 内容透明原则：如果人工智能参与了内容创作，愿意遵循本倡议的创作者可以主动告诉读者。',
+  en: 'AICD 1.0 — the AI Content Disclosure Protocol. A wholly voluntary, open, non-profit principle of AI transparency: if artificial intelligence took part in creating content, creators who follow this protocol can tell their readers so.',
+  zh: 'AICD 1.0 — 人工智能内容主动披露协议。一项完全自愿、开放、非营利的 AI 内容透明原则：如果人工智能参与了内容创作，愿意遵循本协议的创作者可以主动告诉读者。',
   'zh-tw':
-    'AICD 1.0 — 人工智能內容主動披露倡議。一項完全自願、開放、非營利的 AI 內容透明原則：如果人工智能參與了內容創作，願意遵循本倡議的創作者可以主動告訴讀者。'
+    'AICD 1.0 — 人工智能內容主動披露協議。一項完全自願、開放、非營利的 AI 內容透明原則：如果人工智能參與了內容創作，願意遵循本協議的創作者可以主動告訴讀者。'
 }
 
 /** 各语言共用的 head：站点自身的机器可读披露示例 */
@@ -20,7 +20,7 @@ const sharedHead: any[] = [
   ['meta', { name: 'theme-color', content: '#1c1f26', media: '(prefers-color-scheme: dark)' }],
 
   ['meta', { name: 'aicd-version', content: '1.0' }],
-  ['meta', { name: 'aicd-spec', content: 'AI Content Disclosure Initiative' }],
+  ['meta', { name: 'aicd-spec', content: 'AI Content Disclosure Protocol' }],
   ['meta', { name: 'aicd-level', content: 'A3' }],
   ['meta', { name: 'aicd-review', content: 'yes' }],
 
@@ -39,7 +39,7 @@ const headFor = (locale: 'en' | 'zh' | 'zh-tw', ogTitle: string, workName: strin
       '@context': 'https://schema.org',
       '@type': 'CreativeWork',
       name: workName,
-      alternateName: 'AI Content Disclosure Initiative',
+      alternateName: 'AI Content Disclosure Protocol',
       alternateName2: 'AICD',
       version: '1.0',
       datePublished: '2026',
@@ -89,10 +89,10 @@ export default defineConfig({
       title: 'AICD',
       titleTemplate: ':title · AICD',
       description: DESCRIPTION.en,
-      head: headFor('en', 'AI Content Disclosure Initiative · AICD 1.0', 'AI Content Disclosure Initiative'),
+      head: headFor('en', 'AI Content Disclosure Protocol · AICD 1.0', 'AI Content Disclosure Protocol'),
       themeConfig: {
         nav: [
-          { text: 'Article', link: '/initiative/' },
+          { text: 'Article', link: '/protocol/' },
           { text: 'Levels', link: '/levels' },
           { text: 'Adopt', link: '/adopt' },
           { text: 'Verifier', link: '/verifier' },
@@ -109,7 +109,7 @@ export default defineConfig({
         footer: {
           message:
             'The text of this site was written by its LiSR; AICD 1.0 A2',
-          copyright: 'AICD · AI Content Disclosure Initiative'
+          copyright: 'AICD · AI Content Disclosure Protocol'
         }
       }
     },
@@ -122,10 +122,10 @@ export default defineConfig({
       title: 'AICD',
       titleTemplate: ':title · AICD',
       description: DESCRIPTION.zh,
-      head: headFor('zh', '人工智能内容主动披露倡议 · AICD 1.0', '人工智能内容主动披露倡议'),
+      head: headFor('zh', '人工智能内容主动披露协议 · AICD 1.0', '人工智能内容主动披露协议'),
       themeConfig: {
         nav: [
-          { text: '正文', link: '/zh/initiative/' },
+          { text: '正文', link: '/zh/protocol/' },
           { text: '等级', link: '/zh/levels' },
           { text: '采用', link: '/zh/adopt' },
           { text: '验证器', link: '/zh/verifier' },
@@ -142,7 +142,7 @@ export default defineConfig({
         footer: {
           message:
             '本站正文由LiSR撰写 AICD 1.0 A2',
-          copyright: 'AICD · 人工智能内容主动披露倡议'
+          copyright: 'AICD · 人工智能内容主动披露协议'
         }
       }
     },
@@ -155,10 +155,10 @@ export default defineConfig({
       title: 'AICD',
       titleTemplate: ':title · AICD',
       description: DESCRIPTION['zh-tw'],
-      head: headFor('zh-tw', '人工智能內容主動披露倡議 · AICD 1.0', '人工智能內容主動披露倡議'),
+      head: headFor('zh-tw', '人工智能內容主動披露協議 · AICD 1.0', '人工智能內容主動披露協議'),
       themeConfig: {
         nav: [
-          { text: '正文', link: '/zh-tw/initiative/' },
+          { text: '正文', link: '/zh-tw/protocol/' },
           { text: '等級', link: '/zh-tw/levels' },
           { text: '採用', link: '/zh-tw/adopt' },
           { text: '驗證器', link: '/zh-tw/verifier' },
@@ -175,7 +175,7 @@ export default defineConfig({
         footer: {
           message:
             '本站正文由LiSR撰寫 AICD 1.0 A2',
-          copyright: 'AICD · 人工智能內容主動披露倡議'
+          copyright: 'AICD · 人工智能內容主動披露協議'
         }
       }
     }

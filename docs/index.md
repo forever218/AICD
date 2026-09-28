@@ -1,6 +1,6 @@
 ---
 layout: home
-title: AI Content Disclosure Initiative · AICD 1.0
+title: AI Content Disclosure Protocol · AICD 1.0
 titleTemplate: false
 ---
 

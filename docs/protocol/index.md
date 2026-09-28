@@ -1,119 +1,119 @@
 ---
-title: AI Content Disclosure Initiative
+title: AI Content Disclosure Protocol
 headingMark: false
 ---
 ## 1. Purpose {#purpose}
 
-Generative artificial intelligence is becoming a common tool in the creation of text, images, audio, video, and other digital content. AI can be used to conceive, retrieve, translate, organise, polish, or rewrite, and it can also take part in generating part or even all of the content. As AI reaches deeper into content production, readers, viewers, and users of content may no longer be able to tell from the finished work alone what role AI played in it. AICD (AI Content Disclosure Initiative) therefore proposes a simple, open, voluntary principle of content transparency:***when artificial intelligence has in fact taken part in creating content, the creator or publisher may proactively disclose that fact to the public, and explain the manner and degree of AI involvement within a reasonable scope.***
+Generative artificial intelligence is gradually becoming a common tool in the creation of text, images, audio, video, and other digital content. AI can be used for ideation, retrieval, translation, organization, polishing, rewriting, and can also directly participate in the generation of part or even all of the content. As AI becomes more deeply involved in content production, readers, viewers, and content users may be unable to judge from the final work alone what role AI played in it. AICD (AI Content Disclosure Protocol) therefore proposes a simple, open, and voluntary content transparency principle: ***When AI has actually participated in content creation, content creators or publishers may proactively disclose this fact to the public and, within reasonable bounds, explain the manner and degree of AI participation.***
 
-AICD is not opposed to AI creation, and it makes no value judgement about AI-generated content. What AICD advocates is not "banning AI", but giving readers additional information once AI has taken part in content production. We believe creators should be free to use AI tools, and that readers should equally have the right to understand how content was made; the two are not in conflict.
+AICD takes an open attitude toward AI creation and remains value-neutral regarding AI-generated content. The direction advocated by AICD is to provide readers with additional informational context after AI has participated in content production. AICD asserts: creators have the freedom to use AI tools, and readers should also have the right to understand the content creation process; these two demands can coexist and can be mutually compatible within a transparency mechanism.
 
-## 2. Voluntary nature {#voluntary}
+## 2. Voluntary Nature {#voluntary}
 
-AICD is a wholly voluntary, non-mandatory, non-profit, open initiative. Any individual, author, journalist, researcher, publishing house, media outlet, blog, website, platform, community, or other publisher of content may decide for themselves whether to adopt AICD. Adoption is entirely at the discretion of the creator or publisher; AICD does not require any person or organisation to disclose AI use, and does not penalise, restrict, discriminate against, or speak negatively of any party for not adopting this initiative.
+AICD is a fully voluntary, non-mandatory, non-profit, open-participation protocol. Any individual, author, journalist, researcher, publishing institution, media outlet, blog, website, platform, community, or other content publisher may independently decide whether to adopt AICD. Adoption is entirely at the discretion of the content creator or publisher; AICD does not require any individual or organization to disclose AI use, nor does it impose penalties, restrictions, discrimination, or negative evaluations on any entity for not adopting this Protocol.
 
-AICD does not constitute law, administrative regulation, industry supervisory rule, platform policy, or any enforceable contractual obligation. Where any government, platform, publisher, or other organisation requires AI content labelling under its own laws, policies, or business rules, those requirements are independent of AICD's voluntary status. Adopters of AICD may stop adopting it at any time, and may adjust their disclosure approach without affecting their normal creation and publishing activities.
+AICD's normative character is limited to the level of a voluntary initiative. Laws, administrative regulations, industry regulatory provisions, platform policies, and enforceable contractual obligations remain independent from AICD. If any government, platform, publishing institution, or other organization requires AI content labeling under its own laws, policies, or business rules, such requirements remain independent from AICD's voluntary status. Adopters of AICD retain the autonomy to withdraw at any time or adjust their disclosure methods, and may adjust disclosure methods without affecting their normal creative and publishing activities.
 
-## 3. The principle of proactive disclosure {#principle}
+## 3. Principle of Proactive Disclosure {#principle}
 
-The core requirement of adopting AICD is to inform proactively, clearly, and truthfully. When a creator confirms that artificial intelligence took part in creating the content, they should proactively provide the corresponding disclosure at the time of publication wherever possible, and should not deliberately hide that information where an ordinary reader would find it hard to notice. The disclosed information should be concise, easy to understand, and broadly consistent with the actual creation process.
+The core requirement for adopting AICD is proactive, clear, and truthful notification. When creators confirm that AI has participated in content creation, they should, as far as possible, proactively provide corresponding disclosure at the time of publication, and should not deliberately hide such information in locations difficult for ordinary readers to discover. Disclosure information should be concise, easy to understand, and basically consistent with the actual creation process.
 
-The disclosure AICD advocates does not require creators to publish complete AI conversation logs, prompts, internal workflows, private information, account information, API keys, trade secrets, or any other information with no direct bearing on a reader's judgement of AI involvement. The purpose of disclosure is to state truthfully whether and how AI took part, not to require creators to expose their entire creation process.
+The scope of disclosure advocated by AICD is limited to whether and how AI participated. Complete AI conversation logs, prompts, internal workflows, private information, account information, API keys, trade secrets, and other information not directly relevant to readers' judgment of the degree of AI participation fall within the creator's discretion to retain. The purpose of disclosure is to truthfully explain whether and how AI participated; all details of the creation process fall within the creator's discretion to decide whether to make public.
 
-Creators may disclose in natural language — for example, "AI was used to polish the language of this article", "parts of this article were produced with AI assistance", or "the first draft of this article was generated by AI and re-edited by the author" — or they may use the standardised levels and machine-readable data formats defined by AICD. Whichever form is used, the basic principle is that an ordinary reader can reasonably understand it.
+Creators may use natural language disclosure, such as "This article used AI for language polishing," "Some paragraphs of this article were assisted by AI," "The first draft of this article was generated by AI and re-edited by the author," etc., or may use the standardized levels and machine-readable data formats defined by AICD. Regardless of the form used, the basic principle is that ordinary readers can reasonably understand it.
 
-## 4. Degrees of AI involvement {#levels}
+## 4. Levels of AI Participation {#levels}
 
-AICD does not recommend simply dividing digital content into two mutually exclusive categories, "AI-generated" and "human-created", because modern content production often involves both human and artificial intelligence participation. AICD therefore suggests describing the degree of AI involvement by level:
+AICD uses a graded approach to describe the degree of AI participation, because modern content production often involves both human and AI participation. Simply dividing digital content into two mutually exclusive categories—"AI-generated" and "human-created"—cannot accurately reflect the actual creation process. Therefore, AICD recommends the following grading method to describe the degree of AI participation:
 
-- **A0 — No AI:** No generative artificial intelligence was used for any substantive creation, editing, or generation of this content.
-- **A1 — AI-assisted:** AI was used mainly for ideation, brainstorming, gathering material, classifying information, analysing problems, or other supporting work; the final content was produced primarily by a human.
-- **A2 — AI-edited:** AI was used for grammar checking, polishing, translation, rewriting, headline optimisation, restructuring, or other editing work, while the main ideas, facts, and core expression came from the human creator.
-- **A3 — Partially AI-generated:** AI directly generated part of the content, for example some sentences, paragraphs, headings, or summaries, after which a human author reviewed, revised, integrated, or rewrote it.
-- **A4 — Mostly AI-generated:** The body of the content was generated by AI, and a human author carried out meaningful review, editing, revision, fact-checking, or restructuring, and takes responsibility for the published result.
-- **A5 — AI-generated:** The content was mainly or entirely generated by AI; a human only made limited selections, arrangements, formatting, or publishing decisions.
+- **A0 — No AI use:** Generative AI was not used for substantive creation, editing, or content generation in the creation of this content.
+- **A1 — AI-assisted:** AI was mainly used for ideation, brainstorming, material organization, information classification, problem analysis, or other auxiliary work, and the final content was primarily completed independently by humans.
+- **A2 — AI-edited:** AI was used for grammar checking, text polishing, translation, rewriting, title optimization, structural adjustment, or other editing work, but the main viewpoints, facts, and primary expression of the content were provided by the human creator.
+- **A3 — Partially AI-generated:** AI directly generated a portion of the content, such as some sentences, paragraphs, titles, summaries, or other important content, which was subsequently reviewed, modified, integrated, or rewritten by the human author.
+- **A4 — Primarily AI-generated:** The main body of the content was generated by AI, and the human author performed substantive review, editing, modification, fact-checking, or reorganization of the content, and is responsible for the final published content.
+- **A5 — AI-generated:** The content was mainly or entirely generated by AI, with humans performing only limited selection, organization, formatting, or publishing processing.
 
-These levels describe how far AI took part in the creation process; they do not evaluate content quality, the author's ability, or the value of the work. Different types of content may pick the closest level according to their actual circumstances; where a single level cannot accurately describe a complex process, publishers may use several markers or add explanatory text.
+The above levels are used to describe the degree of AI participation in the creation process, not to evaluate content quality, author ability, or work value. Different types of content may choose the closest level according to actual circumstances; if a single level cannot accurately describe a complex creation process, publishers may use multiple labels or additional textual explanations.
 
-## 5. Human review and final responsibility {#review}
+## 5. Human Review and Final Responsibility {#review}
 
-AICD encourages publishers to state whether the content was human-reviewed alongside the degree of AI involvement. For example, one may declare "AI involvement: A3; Human review: Yes", or "AI involvement: A4; the final content was reviewed and is the responsibility of the author".
+AICD encourages content publishers, while disclosing the degree of AI participation, to explain whether human review was conducted according to actual circumstances. For example, one may state "AI participation: A3; human review: yes," or "AI participation: A4; final content reviewed and responsible by the author."
 
-AI-generated content may contain factual errors, fabricated information, logical errors, bias, and other problems. Using artificial intelligence therefore does not automatically transfer or remove the publisher's responsibility for the final work. For content that requires accuracy, expertise, or truthfulness, AICD encourages publishers to carry out human review and fact-checking as the circumstances warrant.
+AI-generated content may contain factual errors, fabricated information, logical errors, bias, and other problems. Therefore, using AI does not automatically transfer or exempt the content publisher from responsibility for the final work. For content requiring accuracy, professionalism, or truthfulness, AICD encourages publishers to conduct human review and fact-checking according to actual circumstances.
 
-AICD does not require all AI-assisted content to undergo the same degree of human review, nor does it prescribe any particular AI tool or review process; the specific responsibilities and review standards may be determined by the nature of the content, the publishing context, and applicable law.
+AICD does not require all AI-assisted content to undergo the same degree of human review, nor does it prescribe that creators must adopt a particular AI tool or review process; specific responsibilities and review standards may be determined independently according to the nature of the content, publishing context, and applicable law.
 
-## 6. AI tool information {#tools}
+## 6. AI Tool Information {#tools}
 
-Publishers adopting AICD may voluntarily disclose the artificial intelligence tools, models, or services they used, for example:
+Publishers adopting AICD may voluntarily disclose the AI tools, models, or services used, for example:
 
-> AI involvement: A2 — AI-edited
-> AI tool: a generative AI model
-> Purpose: language polishing and restructuring
-> Human review: Yes
+> AI participation: A2 — AI-edited
+> AI tool: [a generative AI model]
+> Purpose: language polishing and structural adjustment
+> Human review: yes
 
-Tool names are not a mandatory disclosure item under AICD. Creators may complete a basic disclosure without revealing specific models, providers, or internal technical details. AICD is especially opposed to making "you must publish the specific model name" a condition of adopting this initiative, because different creators may be constrained by privacy, trade secrets, terms of service, or other practical conditions.
+Tool names are an optional disclosure item. Creators may complete basic disclosure while retaining specific model, service provider, or internal technical information. AICD treats disclosure of specific model names as a voluntary choice; privacy, trade secrets, service agreements, or other practical conditions may constitute reasonable grounds for retention. Making "must disclose specific model names" a necessary condition for adopting this Protocol conflicts with AICD's voluntary principle.
 
-## 7. Truthfulness and good faith {#integrity}
+## 7. Truthfulness and Good Faith in Disclosure {#integrity}
 
-The effectiveness of AICD rests on the good faith of its participants. Adopters should disclose according to the actual creation process as far as possible, should not deliberately mark clearly AI-generated content as "no AI used", and should not mislead readers by exaggerating or falsifying AI labels.
+The effectiveness of AICD is based on the good faith of participants. Adopters should disclose according to the actual creation process as far as possible, and should not deliberately label content that is clearly AI-generated as "no AI use," nor mislead readers through exaggerated or false AI labels.
 
-At the same time, AICD does not require creators to trace AI use they cannot reasonably confirm, nor does it require creators to prove that they did not use a particular AI tool. AICD is a proactive disclosure system, not an AI detection system.
+At the same time, AICD does not require creators to retroactively disclose historical AI use that cannot be reasonably confirmed, nor does it require creators to prove that they did not use a certain AI tool. AICD is a proactive disclosure system, not an AI detection system.
 
-Therefore, content carrying an "AICD A0" marker only means that the publisher declares that no AI within the scope of that definition was used in its creation; it does not mean that the maintainers of AICD, a platform, or any third party has technically certified that claim. Likewise, content carrying an "AICD A4" or "A5" marker only means that the publisher has proactively disclosed the degree of AI involvement; it does not mean that AICD certifies the quality of the content.
+Therefore, content bearing the "AICD A0" label only means that the publisher declares that no AI falling within the defined scope was used in its creation process; it does not mean that AICD's maintainers, platforms, or any third party have technically certified that declaration. Similarly, content bearing the "AICD A4" or "A5" label only indicates that the publisher proactively disclosed its degree of AI participation, and does not represent AICD's certification of content quality.
 
-## 8. Participation is not a judgement of value {#neutrality}
+## 8. No Evaluation of Content Value Based on AI Participation {#neutrality}
 
-AICD does not hold that human creation is inherently better than AI-assisted creation, nor that AI-generated content is inherently inferior to human creation. The degree of AI involvement should not in itself be the sole basis for judging the truthfulness, quality, artistic value, authorial ability, or social value of content.
+AICD takes an equal stance toward human creation and AI-assisted creation, and remains value-neutral toward AI-generated content and human creation. The degree of AI participation itself is process information; truthfulness, quality, artistic value, author ability, or social value have independent criteria for judgment.
 
-AICD's aim is not to build "AI content discrimination", but to build a mechanism for transparency about the creation process. Readers may decide for themselves whether to take this information into account, and publishers, platforms, or other organisations may decide under their own rules how to use it; AICD itself makes no value judgement about any mode of creation.
+AICD's goal is to establish a creation process transparency mechanism. Readers may decide whether to refer to this information according to their own needs, and publishing institutions, platforms, or other organizations may also decide how to use this information according to their own rules. AICD remains value-neutral toward any method of creation.
 
-## 9. Privacy, freedom, and reasonable disclosure {#privacy}
+## 9. Privacy, Freedom, and Reasonable Disclosure {#privacy}
 
-AICD argues for a reasonable balance between transparency and freedom, and between informed understanding and privacy. Content creators should not be asked to reveal private conversations, prompts, personally identifying information, trade secrets, unpublished research material, or other information unrelated to AI content disclosure simply because they adopt AICD.
+AICD advocates maintaining a reasonable balance between transparency and freedom, and between informed knowledge and privacy. For creators adopting AICD, the scope of disclosure is limited to the fact of AI participation. Private conversations, prompts, personally identifiable information, trade secrets, unpublished research materials, and other information unrelated to AI content disclosure fall within the creator's discretion to retain.
 
-The "proactive notification" AICD requires should be understood as a reasonable disclosure of the fact of AI involvement, not as an unlimited exposure of the creation process. Different contexts — personal blogs, news media, academic publications, commercial advertising, literary works, social media, and so on — may adopt disclosure of differing degrees.
+The "proactive notification" required by AICD should be understood as reasonable disclosure of the fact of AI participation, rather than requiring creators to disclose the creation process without limit. For different scenarios such as personal blogs, news media, academic publications, commercial advertising, literary works, and social media, different degrees of disclosure may be adopted.
 
-## 10. Openness and interoperability {#interop}
+## 10. Openness and Interoperability {#interop}
 
-AICD encourages implementing AI content disclosure in an open-standard way. Beyond the marker visible to ordinary readers, a unified machine-readable format can be provided in the future so that browsers, search engines, content management systems, publishing platforms, AI systems, and other software can automatically read a piece of content's AI involvement information.
+AICD encourages the implementation of AI content disclosure in an open-standard manner. In addition to visible labels for ordinary readers, a unified machine-readable format may be further provided in the future, enabling browsers, search engines, content management systems, publishing platforms, AI systems, and other software to automatically read the AI participation information of content.
 
-On the technical side, AICD may adopt HTML Metadata, JSON, JSON-LD, HTTP Header, or other suitable data formats, and encourages compatibility with existing and future standards and initiatives for digital content provenance and authenticity, including but not limited to C2PA, Content Credentials, and W3C.
+In terms of technical implementation, AICD may adopt HTML Metadata, JSON, JSON-LD, HTTP Header, or other appropriate data formats, and encourages compatibility with existing and future digital content provenance and authenticity standards, including but not limited to C2PA, Content Credentials, and W3C-related standards or initiatives.
 
-AICD does not require anyone to reinvent existing digital content provenance technology. For complex needs such as digital signatures, provenance proofs, and content integrity verification, compatibility with mature open standards should be preferred; AICD's focus remains on providing a simple, low-threshold way for ordinary creators to actually disclose AI content.
+AICD takes a stance of compatibility with and reuse of existing digital content provenance technologies. For complex needs such as digital signatures, provenance proof, and content integrity verification, priority should be given to compatibility with mature open standards; AICD's focus remains on providing a simple, low-threshold AI content disclosure method that ordinary creators can actually adopt.
 
-## 11. How to adopt {#adoption}
+## 11. How to Adopt {#adoption}
 
-Any individual or organisation may adopt AICD; no registration, payment, or authorisation from any body is required. Adopters may declare on a website, in an article, a publication, or other digital content:
+Any individual or organization may adopt AICD without registration, payment, or authorization from any institution. Adopters may state in websites, articles, publications, or other digital content:
 
-> AICD 1.0 · AI involvement: A2 (AI-edited) · Human review: Yes
+> AICD 1.0 · AI participation: A2 (AI-edited) · Human review: yes
 
-Or in a more compact form:
+Or use a more concise form:
 
 > AI Disclosure: A2
 
-For implementations that support machine reading, standardised fields may record whether AI took part, the degree of involvement, the purpose, whether there was human review, and optional tool information.
+For implementations supporting machine reading, standardized fields may be used to record whether AI participated, the degree of participation, purpose, human review status, and optional tool information.
 
-Anyone may develop plug-ins, themes, content management systems, browser extensions, verifiers, search tools, or other software that supports AICD. Any website may adopt AICD in its own services free of charge.
+Anyone may develop plugins, themes, content management systems, browser extensions, validators, search tools, or other software supporting AICD. Any website may adopt AICD free of charge in its own services.
 
-## 12. Open evolution {#evolution}
+## 12. Open Development {#evolution}
 
-AICD belongs to no single commercial organisation, and does not aim to control the market for AI content disclosure. This initiative welcomes opinions, revision proposals, and technical implementations from creators, developers, publishers, researchers, platforms, and the public.
+AICD does not belong to any single commercial organization, nor does it aim to control the AI content disclosure market. This Protocol welcomes opinions, revision suggestions, and technical implementation proposals from creators, developers, publishing institutions, researchers, platforms, and the public.
 
-Future versions may, according to actual use, add new types of AI involvement, machine-readable formats, digital signatures, content provenance proofs, verification mechanisms, and ways of aligning with international standards. Any extension should preserve AICD's core principles as far as possible: voluntary, proactive, truthful, transparent, low-threshold, respectful of privacy, respectful of creative freedom, and free of value discrimination against AI creation.
+Future versions may add new AI participation types, machine-readable formats, digital signatures, content provenance proof, verification mechanisms, and methods of compatibility with international standards according to actual usage. Any extension should, as far as possible, maintain AICD's core principles: voluntary, proactive, truthful, transparent, low-threshold, respect for privacy, respect for creative freedom, and non-discrimination against AI creation.
 
-## 13. Core statement {#statement}
+## 13. Core Statement {#statement}
 
-In the end, AICD advocates only one simple thing:
+AICD ultimately advocates only one simple thing:
 
-> If artificial intelligence took part in creating content, creators who are willing to follow this initiative can tell their readers so.
+> If AI has participated in content creation, creators willing to follow this Protocol may proactively tell readers.
 
-We do not ask for AI to be banned, we do not ask for all content to be labelled, we do not ask creators to expose their private creation process, and we do not ask anyone to accept AI detection.
+AICD advocates the autonomous use of AI tools, voluntary disclosure, respect for private creation processes, and a distinction between AI detection and disclosure mechanisms.
 
-What we hope to build is a digital content culture based on voluntariness and good faith:
+We hope to establish a digital content culture based on voluntariness and good faith:
 
-***Creators have the freedom to use tools, readers have the right to understand how things are made; artificial intelligence may take part in creation, and the creation process can remain transparent.***
+***Creators have the freedom to use tools, readers have the right to understand the creation method; AI can participate in creation, and the creation process can remain transparent.***
 
-<p class="page-head__meta"><span>AICD 1.0</span><span>AI Content Disclosure Initiative</span><span>人工智能内容主动披露倡议</span></p>
+<p class="page-head__meta"><span>AICD 1.0</span><span>AI Content Disclosure Protocol</span></p>
 
 *Create freely. Disclose voluntarily.*

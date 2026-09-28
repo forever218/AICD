@@ -39,6 +39,6 @@ AICD: 1.0; level=A3; review=yes
 
 ## 互通性 {#interop}
 
-AICD 不重新發明數字內容溯源技術。數字簽名、來源證明、內容完整性驗證等需求，建議與 C2PA、Content Credentials、W3C 等成熟開放標準配合使用；AICD 只負責把「AI 是否參與、如何參與」這件事說清楚。
+AICD 複用現有數位內容溯源技術。數字簽名、來源證明、內容完整性驗證等需求，建議與 C2PA、Content Credentials、W3C 等成熟開放標準配合使用。
 
-[回到倡議全文 →](/zh-tw/initiative/#adoption)
+[回到協議全文 →](/zh-tw/protocol/#adoption)

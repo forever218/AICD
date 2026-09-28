@@ -102,7 +102,7 @@ export interface UiStrings {
 const en: UiStrings = {
   langLabel: 'Change language',
 
-  homeLatin: 'AI Content Disclosure Initiative',
+  homeLatin: 'AI Content Disclosure Protocol',
   motto: ['Create freely', 'Disclose voluntarily'],
 
   versioned: (version) => `AICD ${version}`,
@@ -211,7 +211,7 @@ const en: UiStrings = {
 const zh: UiStrings = {
   langLabel: '切换语言',
 
-  homeLatin: '人工智能内容主动披露倡议',
+  homeLatin: '人工智能内容主动披露协议',
   motto: ['Create freely', 'Disclose voluntarily'],
 
   versioned: (version) => `AICD ${version}`,
@@ -317,7 +317,7 @@ const zh: UiStrings = {
 const zhTw: UiStrings = {
   langLabel: '切換語言',
 
-  homeLatin: '人工智能內容主動披露倡議',
+  homeLatin: '人工智能內容主動披露協議',
   motto: ['Create freely', 'Disclose voluntarily'],
 
   versioned: (version) => `AICD ${version}`,

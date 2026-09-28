@@ -9,7 +9,7 @@ export interface ParticipationLevel {
   pct: number
   /** 等级名 */
   name: string
-  /** 倡议原文定义 */
+  /** 协议原文定义 */
   definition: string
   /** 极简场景标签（预留） */
   scene?: string

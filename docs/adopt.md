@@ -38,6 +38,6 @@ AICD: 1.0; level=A3; review=yes
 
 ## Interoperability {#interop}
 
-AICD does not reinvent digital content provenance. For digital signatures, provenance proofs, and content integrity, pair it with mature open standards such as C2PA, Content Credentials, and W3C; AICD only takes care of stating whether AI took part and how.
+AICD reuse existing digital content provenance technologies. For digital signatures, provenance proofs, and content integrity, pair it with mature open standards such as C2PA, Content Credentials, and W3C。
 
-[Back to the full initiative →](/initiative/#adoption)
+[Back to the full protocol →](/protocol/#adoption)
