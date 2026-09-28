@@ -2,7 +2,6 @@
 import { computed, nextTick, onMounted, watch, watchEffect } from 'vue'
 import { inBrowser, useData, useRoute } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
-import ScrollProgress from './components/ScrollProgress.vue'
 import LangSwitch from './components/LangSwitch.vue'
 import MobileToc from './components/MobileToc.vue'
 
@@ -67,7 +66,6 @@ watch(
 <template>
   <Layout>
     <template #layout-top>
-      <ScrollProgress />
       <!-- 移动端：右下角目录按钮（顶部那条目录已由 CSS 撤掉） -->
       <MobileToc />
     </template>
